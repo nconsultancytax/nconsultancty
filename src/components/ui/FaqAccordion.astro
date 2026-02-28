@@ -1,0 +1,77 @@
+---
+import type { FaqItem } from '@data/faqs'
+import { Plus, Minus } from 'lucide-astro'
+
+interface Props {
+  items: FaqItem[]
+  firstOpen?: boolean
+}
+
+const { items, firstOpen = true } = Astro.props
+---
+
+<div class="divide-y divide-gray-200">
+  {items.map((item, index) => (
+    <div class="faq-item" data-faq-id={item.id}>
+      <button
+        class="faq-trigger flex items-center justify-between w-full py-5 text-left group"
+        aria-expanded={firstOpen && index === 0 ? 'true' : 'false'}
+      >
+        <span class="font-heading font-semibold text-base text-navy group-hover:text-amber transition-colors pr-4">
+          {item.question}
+        </span>
+        <span class="shrink-0 w-6 h-6 flex items-center justify-center text-text-mid group-hover:text-amber transition-colors">
+          <Plus class="w-5 h-5 faq-icon-plus" />
+          <Minus class="w-5 h-5 faq-icon-minus hidden" />
+        </span>
+      </button>
+      <div
+        class={`faq-panel overflow-hidden transition-all duration-300 ${
+          firstOpen && index === 0 ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <p class="pb-5 text-sm text-text-mid leading-relaxed">
+          {item.answer}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.faq-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true'
+      const panel = btn.nextElementSibling as HTMLElement
+      const plusIcon = btn.querySelector('.faq-icon-plus') as HTMLElement
+      const minusIcon = btn.querySelector('.faq-icon-minus') as HTMLElement
+
+      // Toggle state
+      btn.setAttribute('aria-expanded', String(!expanded))
+
+      if (expanded) {
+        panel.style.maxHeight = '0'
+        panel.style.opacity = '0'
+        plusIcon?.classList.remove('hidden')
+        minusIcon?.classList.add('hidden')
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px'
+        panel.style.opacity = '1'
+        plusIcon?.classList.add('hidden')
+        minusIcon?.classList.remove('hidden')
+
+        // Fire analytics
+        const faqId = btn.closest('.faq-item')?.getAttribute('data-faq-id')
+        window.dataLayer?.push({ event: 'faq_expand', question_id: faqId })
+      }
+    })
+  })
+
+  // Set initial state for first-open items
+  document.querySelectorAll('.faq-trigger[aria-expanded="true"]').forEach((btn) => {
+    const plusIcon = btn.querySelector('.faq-icon-plus') as HTMLElement
+    const minusIcon = btn.querySelector('.faq-icon-minus') as HTMLElement
+    plusIcon?.classList.add('hidden')
+    minusIcon?.classList.remove('hidden')
+  })
+</script>

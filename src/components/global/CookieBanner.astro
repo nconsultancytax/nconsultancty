@@ -1,0 +1,72 @@
+---
+import { Cookie } from 'lucide-astro'
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg transform translate-y-full transition-transform duration-300"
+  role="dialog"
+  aria-label="Cookie consent"
+>
+  <div class="container py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3 text-sm text-text-mid">
+      <Cookie class="w-5 h-5 text-amber shrink-0" />
+      <p>We use cookies to improve your experience and analyse site traffic.</p>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <button
+        id="cookie-accept-all"
+        class="px-4 py-2 text-sm font-semibold text-white bg-amber rounded-pill hover:bg-amber-dark transition-colors"
+      >
+        Accept All
+      </button>
+      <button
+        id="cookie-necessary"
+        class="px-4 py-2 text-sm font-semibold text-text-mid border border-gray-300 rounded-pill hover:bg-gray-100 transition-colors"
+      >
+        Necessary Only
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner')
+  const saved = localStorage.getItem('nacctax_consent')
+
+  // Show banner if no consent decision saved
+  if (!saved && banner) {
+    setTimeout(() => {
+      banner.classList.remove('translate-y-full')
+    }, 1000)
+  }
+
+  // If previously accepted all, grant consent
+  if (saved === 'all') {
+    grantAnalytics()
+  }
+
+  document.getElementById('cookie-accept-all')?.addEventListener('click', () => {
+    localStorage.setItem('nacctax_consent', 'all')
+    grantAnalytics()
+    hideBanner()
+  })
+
+  document.getElementById('cookie-necessary')?.addEventListener('click', () => {
+    localStorage.setItem('nacctax_consent', 'necessary')
+    hideBanner()
+  })
+
+  function hideBanner() {
+    banner?.classList.add('translate-y-full')
+  }
+
+  function grantAnalytics() {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+      })
+    }
+  }
+</script>

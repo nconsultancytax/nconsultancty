@@ -1,0 +1,22 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import Hero from '@components/sections/Hero.astro'
+import TrustStrip from '@components/sections/TrustStrip.astro'
+import ServicesGrid from '@components/sections/ServicesGrid.astro'
+import ReviewsCarousel from '@components/sections/ReviewsCarousel.astro'
+import AboutSnapshot from '@components/sections/AboutSnapshot.astro'
+import WhyChooseUs from '@components/sections/WhyChooseUs.astro'
+import FaqSnippet from '@components/sections/FaqSnippet.astro'
+import CtaBanner from '@components/sections/CtaBanner.astro'
+---
+
+<PageLayout title="Home">
+  <Hero />
+  <TrustStrip />
+  <ServicesGrid showHeading={true} />
+  <ReviewsCarousel />
+  <AboutSnapshot />
+  <WhyChooseUs />
+  <FaqSnippet />
+  <CtaBanner />
+</PageLayout>

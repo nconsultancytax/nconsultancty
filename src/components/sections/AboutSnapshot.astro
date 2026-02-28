@@ -1,0 +1,67 @@
+---
+import SectionHeading from '@components/ui/SectionHeading.astro'
+import Button from '@components/ui/Button.astro'
+import { GraduationCap, Globe, Monitor, IndianRupee, ShieldCheck, ArrowRight } from 'lucide-astro'
+
+const keyPoints = [
+  { icon: GraduationCap, text: 'B.COM (P.A.) qualified professionals' },
+  { icon: Globe, text: 'Serving individuals and businesses across India' },
+  { icon: Monitor, text: 'Complete online service delivery' },
+  { icon: IndianRupee, text: 'Transparent and affordable pricing' },
+  { icon: ShieldCheck, text: 'Committed to accuracy and compliance' },
+]
+---
+
+<section class="section-py bg-white">
+  <div class="container">
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+      <!-- Left: Founder placeholder -->
+      <div class="w-full lg:w-2/5 flex justify-center">
+        <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-card-lg overflow-hidden bg-bg-grey border-4 border-white shadow-lg">
+          <!-- Placeholder — replace with actual founder photo -->
+          <div class="w-full h-full flex items-center justify-center bg-navy/5">
+            <div class="text-center">
+              <div class="w-20 h-20 mx-auto mb-3 rounded-full bg-navy/10 flex items-center justify-center">
+                <span class="font-heading font-bold text-2xl text-navy">NS</span>
+              </div>
+              <p class="font-heading font-semibold text-sm text-navy">Nikunn S</p>
+              <p class="text-xs text-text-mid">Founder & Lead Consultant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="w-full lg:w-3/5">
+        <SectionHeading
+          label="About Us"
+          heading="Who We Are"
+          sub="Experienced. Qualified. Committed to Your Financial Success."
+          align="left"
+        />
+
+        <p class="text-base text-text-mid leading-relaxed mb-6">
+          N Accounts & Tax Consultancy is a team of experienced professionals dedicated to providing
+          expert tax and accounting services across India. We are committed to accuracy, compliance,
+          and maximising the financial benefits available to every client.
+        </p>
+
+        <!-- Key points -->
+        <ul class="space-y-3 mb-8">
+          {keyPoints.map((point) => (
+            <li class="flex items-center gap-3 text-sm text-text-dark">
+              <point.icon class="w-4 h-4 text-amber shrink-0" />
+              {point.text}
+            </li>
+          ))}
+        </ul>
+
+        <Button href="/about-us/" variant="secondary">
+          Learn More About Us
+          <ArrowRight class="w-4 h-4" />
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

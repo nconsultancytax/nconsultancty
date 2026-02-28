@@ -1,0 +1,58 @@
+---
+import reviews from '@data/reviews.json'
+import ReviewCard from '@components/cards/ReviewCard.astro'
+import SectionHeading from '@components/ui/SectionHeading.astro'
+import { Star } from 'lucide-astro'
+
+// Duplicate for seamless marquee loop
+const allReviews = [...reviews, ...reviews]
+---
+
+<section class="section-py bg-white overflow-hidden">
+  <div class="container">
+    <SectionHeading
+      label="Testimonials"
+      heading="What Our Clients Say"
+      sub="Hear from individuals and businesses we've helped across India."
+    />
+
+    <!-- Rating badge -->
+    <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="flex items-center gap-0.5">
+        {Array.from({ length: 5 }).map(() => (
+          <Star class="w-5 h-5 text-amber fill-amber" />
+        ))}
+      </div>
+      <span class="text-sm font-medium text-navy">5.0 on Google</span>
+    </div>
+  </div>
+
+  <!-- Marquee track — full viewport width -->
+  <div class="relative">
+    <div class="flex gap-4 animate-marquee no-scrollbar" style="width: max-content;">
+      {allReviews.map((review) => (
+        <ReviewCard
+          name={review.name}
+          rating={review.rating}
+          text={review.text}
+          date={review.date}
+        />
+      ))}
+    </div>
+  </div>
+
+  <!-- Google link -->
+  <div class="container text-center mt-8">
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber hover:text-amber-dark transition-colors"
+    >
+      See all reviews on Google
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+    </a>
+  </div>
+</section>

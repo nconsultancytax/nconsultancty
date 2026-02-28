@@ -1,0 +1,31 @@
+---
+import { faqs } from '@data/faqs'
+import SectionHeading from '@components/ui/SectionHeading.astro'
+import FaqAccordion from '@components/ui/FaqAccordion.astro'
+import { ArrowRight } from 'lucide-astro'
+
+// Show first 4 FAQs on homepage
+const snippetFaqs = faqs.slice(0, 4)
+---
+
+<section class="section-py bg-bg-light">
+  <div class="container max-w-3xl">
+    <SectionHeading
+      label="FAQ"
+      heading="Frequently Asked Questions"
+      sub="Quick answers to common questions about our services."
+    />
+
+    <FaqAccordion items={snippetFaqs} firstOpen={true} />
+
+    <div class="text-center mt-8">
+      <a
+        href="/faq/"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber hover:text-amber-dark transition-colors"
+      >
+        View All FAQs
+        <ArrowRight class="w-3.5 h-3.5" />
+      </a>
+    </div>
+  </div>
+</section>

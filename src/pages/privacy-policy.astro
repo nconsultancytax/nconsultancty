@@ -1,0 +1,44 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PageHero from '@components/sections/PageHero.astro'
+
+const breadcrumbItems = [{ label: 'Privacy Policy', href: '' }]
+---
+
+<PageLayout title="Privacy Policy" description="Privacy Policy for N Accounts & Tax Consultancy — how we collect, use, and protect your personal information.">
+  <PageHero heading="Privacy Policy" sub="Last updated: February 2026" breadcrumbItems={breadcrumbItems} />
+
+  <section class="section-py bg-white">
+    <div class="container max-w-3xl">
+      <div class="prose prose-navy max-w-none space-y-8">
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">1. Information We Collect</h2>
+          <p class="text-sm text-text-mid leading-relaxed">When you use our services or contact us through our website, we may collect the following personal information: your name, email address, phone number, and any documents you submit for the purpose of service delivery. We do not collect information beyond what is required to fulfil your service request.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">2. How We Use Your Information</h2>
+          <p class="text-sm text-text-mid leading-relaxed">Your personal information is used solely for the purpose of delivering the services you have requested — including tax filing, registration, and accounting services. We may also use your contact details to respond to enquiries and provide updates on your service status.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">3. Data Storage & Security</h2>
+          <p class="text-sm text-text-mid leading-relaxed">We take reasonable measures to protect your personal information from unauthorised access, loss, or misuse. Your data is stored securely and retained only for as long as necessary to fulfil the service or as required by Indian law.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">4. Third-Party Sharing</h2>
+          <p class="text-sm text-text-mid leading-relaxed">We do not sell, trade, or share your personal information with third parties for marketing purposes. Information may be shared with government portals only as required to complete your tax filings or registrations on your behalf.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">5. Cookies & Analytics</h2>
+          <p class="text-sm text-text-mid leading-relaxed">Our website uses cookies to improve your browsing experience and analyse traffic (via Google Analytics). You may choose to accept or decline non-essential cookies through the cookie consent banner displayed on your first visit.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">6. Your Rights</h2>
+          <p class="text-sm text-text-mid leading-relaxed">You have the right to access, correct, or request deletion of your personal data at any time. To exercise these rights, contact us at nconsultancy.tax@gmail.com or call +91 7502979296.</p>
+        </div>
+        <div class="bg-bg-light rounded-card p-5">
+          <p class="text-sm text-text-mid">Questions about this policy? Email us at <a href="mailto:nconsultancy.tax@gmail.com" class="text-amber hover:text-amber-dark">nconsultancy.tax@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

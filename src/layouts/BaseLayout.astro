@@ -1,0 +1,121 @@
+---
+interface Props {
+  title: string
+  description?: string
+  ogImage?: string
+  canonicalUrl?: string
+}
+
+const {
+  title,
+  description = 'Professional accounting, tax filing, GST registration, and business registration services across India. 100% online, accurate, and affordable.',
+  ogImage = '/og-image.jpg',
+  canonicalUrl,
+} = Astro.props
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://www.naccountstax.com'
+const fullTitle = title === 'Home'
+  ? 'N Accounts & Tax Consultancy — Act Wise & Act Precise on Your Finances'
+  : `${title} | N Accounts & Tax Consultancy`
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href
+const gtmId = import.meta.env.PUBLIC_GTM_ID || ''
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="N Accounts & Tax Consultancy" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Preconnect to Google Fonts servers to save TCP+TLS round-trips -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Non-render-blocking font load -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Language flash prevention: read localStorage before paint -->
+    <script is:inline>
+      (function() {
+        try {
+          var lang = localStorage.getItem('nacctax_lang') || 'en';
+          document.documentElement.setAttribute('lang', lang);
+        } catch(e) {}
+      })();
+    </script>
+
+    <!-- GTM Consent Mode default (all denied) -->
+    {gtmId && (
+      <script is:inline define:vars={{ gtmId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied'
+        });
+      </script>
+    )}
+
+    <!-- GTM Script -->
+    {gtmId && (
+      <script is:inline define:vars={{ gtmId }}>
+        (function(w,d,s,l,i){
+          w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+          var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+          j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+          f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer', gtmId);
+      </script>
+    )}
+
+    <!-- Global + Animation CSS -->
+    <style is:global>
+      @import '../styles/global.css';
+      @import '../styles/animations.css';
+    </style>
+  </head>
+
+  <body class="font-body text-text-dark bg-white antialiased">
+    <!-- GTM noscript fallback -->
+    {gtmId && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        ></iframe>
+      </noscript>
+    )}
+
+    <slot />
+  </body>
+</html>

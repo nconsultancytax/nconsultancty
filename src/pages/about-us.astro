@@ -1,0 +1,132 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PageHero from '@components/sections/PageHero.astro'
+import StatsStrip from '@components/sections/StatsStrip.astro'
+import WhyChooseUs from '@components/sections/WhyChooseUs.astro'
+import CtaBanner from '@components/sections/CtaBanner.astro'
+import SectionHeading from '@components/ui/SectionHeading.astro'
+import { Target, Eye, Scale, Users, Clock, GraduationCap, MapPin } from 'lucide-astro'
+
+const values = [
+  { icon: Target, title: 'Accuracy', desc: 'Every filing, report, and submission is carefully verified before it reaches you or the government.' },
+  { icon: Eye, title: 'Transparency', desc: 'Honest advice and clear pricing \u2014 no hidden fees, no surprises.' },
+  { icon: Scale, title: 'Compliance', desc: 'All services are aligned with current Indian tax and regulatory standards.' },
+  { icon: Users, title: 'Accessibility', desc: 'Expert financial services made simple and affordable for everyone.' },
+  { icon: Clock, title: 'Reliability', desc: 'We meet every deadline \u2014 your compliance is our responsibility.' },
+]
+
+const breadcrumbItems = [{ label: 'About Us', href: '' }]
+---
+
+<PageLayout
+  title="About Us"
+  description="Learn about N Accounts & Tax Consultancy \u2014 our story, values, and commitment to accurate, affordable financial services across India."
+>
+  <PageHero
+    heading="About N Accounts & Tax Consultancy"
+    sub="Experienced. Qualified. Committed to Your Financial Success."
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <!-- Our Story -->
+  <section class="section-py bg-white">
+    <div class="container">
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <div class="w-full lg:w-1/2">
+          <SectionHeading label="Our Story" heading="Who We Are" align="left" />
+          <div class="space-y-4 text-base text-text-mid leading-relaxed">
+            <p>
+              N Accounts & Tax Consultancy is a professional tax and accounting consultancy firm
+              based in Thiruchengodu, Namakkal, Tamil Nadu. We provide end-to-end financial compliance
+              and business registration services to individuals and businesses across India.
+            </p>
+            <p>
+              Built on the principles of accuracy, transparency, and a client-first approach, we
+              combine professional expertise with a fully online delivery model &mdash; so you receive
+              expert guidance wherever you are in India.
+            </p>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2">
+          <div class="bg-bg-light rounded-card-lg p-8">
+            <StatsStrip />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet the Founder -->
+  <section class="section-py bg-bg-light">
+    <div class="container max-w-3xl text-center">
+      <SectionHeading label="Leadership" heading="Meet the Founder" />
+
+      <div class="bg-white rounded-card-lg shadow-md p-8 inline-block">
+        <!-- Placeholder avatar -->
+        <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-navy/10 flex items-center justify-center">
+          <span class="font-heading font-bold text-3xl text-navy">NS</span>
+        </div>
+        <h3 class="font-heading font-bold text-xl text-navy">Nikunn S</h3>
+        <p class="text-sm text-amber font-medium mt-1">B.COM (P.A.)</p>
+        <p class="text-sm text-text-mid mt-0.5">Founder & Lead Consultant</p>
+
+        <div class="flex flex-wrap justify-center gap-2 mt-4">
+          {['Tax Filing', 'GST Compliance', 'Business Registration', 'Accounting'].map((tag) => (
+            <span class="px-3 py-1 text-xs font-medium text-navy bg-navy/5 rounded-pill">{tag}</span>
+          ))}
+        </div>
+
+        <p class="text-sm text-text-mid leading-relaxed mt-5 max-w-lg">
+          Nikunn S holds a Bachelor of Commerce degree with a specialisation in Professional
+          Accounting. With in-depth expertise in Indian taxation, GST compliance, and business
+          registrations, Nikunn brings precision and dedication to every client engagement &mdash;
+          ensuring the right outcome, the first time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Values -->
+  <section class="section-py bg-white">
+    <div class="container">
+      <SectionHeading label="Our Principles" heading="Our Values" />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
+        {values.map((v) => (
+          <div class="text-center p-5 rounded-card-lg bg-bg-light hover:shadow-md transition-all duration-200">
+            <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center rounded-full bg-amber/10 text-amber">
+              <v.icon class="w-5 h-5" />
+            </div>
+            <h3 class="font-heading font-semibold text-sm text-navy mb-1.5">{v.title}</h3>
+            <p class="text-xs text-text-mid leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Reach -->
+  <section class="section-py bg-navy-gradient">
+    <div class="container">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+        <div class="w-full lg:w-1/2">
+          <SectionHeading label="Coverage" heading="Our Reach" align="left" dark={true} />
+          <p class="text-base text-white/70 leading-relaxed">
+            Our office is based in Thiruchengodu, Namakkal, Tamil Nadu &mdash; but our services
+            reach every corner of India. Thanks to our fully online delivery model, no physical visit
+            is ever required. From the initial consultation to final document delivery, everything
+            is handled securely online.
+          </p>
+        </div>
+        <div class="w-full lg:w-1/2 flex justify-center">
+          <div class="w-64 h-64 flex items-center justify-center bg-white/5 rounded-card-lg">
+            <MapPin class="w-16 h-16 text-amber/40" />
+            <span class="sr-only">India map showing pan-India service coverage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</PageLayout>

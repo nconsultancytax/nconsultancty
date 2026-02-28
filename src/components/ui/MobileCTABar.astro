@@ -1,0 +1,33 @@
+---
+import { contactInfo } from '@data/navigation'
+import { MessageCircle, ArrowRight } from 'lucide-astro'
+
+interface Props {
+  serviceSlug: string
+}
+
+const { serviceSlug } = Astro.props
+const waUrl = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent(`Hi N Accounts, I am interested in your ${serviceSlug.replace(/-/g, ' ')} service.`)}`
+---
+
+<!-- Fixed bottom bar — visible only on mobile, hidden on lg+ (where sidebar shows) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:hidden">
+  <div class="flex items-center gap-3 px-4 py-3">
+    <a
+      href="/contact/"
+      class="flex-1 flex items-center justify-center gap-2 py-3 bg-amber text-white font-semibold rounded-pill text-sm shadow-cta"
+    >
+      Enquire Now
+      <ArrowRight class="w-4 h-4" />
+    </a>
+    <a
+      href={waUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-center w-12 h-12 bg-whatsapp text-white rounded-full shadow-wa shrink-0"
+      aria-label="Chat on WhatsApp"
+    >
+      <MessageCircle class="w-5 h-5" />
+    </a>
+  </div>
+</div>

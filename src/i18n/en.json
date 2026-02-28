@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "label": "100% Online \u00b7 Pan-India Service",
+    "h1": "Professional Accounting & Tax Services for Individuals and Businesses",
+    "sub": "Act Wise & Act Precise on Your Finances",
+    "supporting": "Trusted by individuals and businesses across India \u2014 100% online, accurate, and affordable.",
+    "cta_primary": "Explore Our Services",
+    "cta_secondary": "Get a Free Consultation",
+    "card_title": "Free Initial Consultation",
+    "card_text": "Book a free session \u2014 no obligation",
+    "card_cta": "WhatsApp to Book"
+  },
+  "trust": {
+    "qualified": "Qualified Professionals",
+    "online": "100% Online Service",
+    "pan_india": "Pan-India Reach",
+    "affordable": "Affordable Pricing",
+    "accurate": "Accurate & Compliant"
+  },
+  "services": {
+    "heading": "Our Services",
+    "sub": "Expert tax, accounting, and registration services \u2014 all under one roof.",
+    "view_all": "View All Services",
+    "enquire": "Enquire About This Service",
+    "whats_included": "What\u2019s Included",
+    "related": "Related Services",
+    "not_sure": "Not sure which service you need?",
+    "not_sure_sub": "Contact us for a free consultation \u2014 we\u2019ll guide you to the right solution."
+  },
+  "reviews": {
+    "heading": "What Our Clients Say",
+    "sub": "Hear from individuals and businesses we\u2019ve helped across India.",
+    "rating_badge": "5.0 on Google",
+    "cta": "See all reviews on Google"
+  },
+  "about": {
+    "heading": "Who We Are",
+    "sub": "Experienced. Qualified. Committed to Your Financial Success.",
+    "body": "N Accounts & Tax Consultancy is a team of experienced professionals dedicated to providing expert tax and accounting services across India. We are committed to accuracy, compliance, and maximising the financial benefits available to every client.",
+    "learn_more": "Learn More About Us",
+    "our_story_heading": "Our Story",
+    "our_story": "N Accounts & Tax Consultancy is a professional tax and accounting consultancy firm based in Thiruchengodu, Namakkal, Tamil Nadu. We provide end-to-end financial compliance and business registration services to individuals and businesses across India.\n\nBuilt on the principles of accuracy, transparency, and a client-first approach, we combine professional expertise with a fully online delivery model \u2014 so you receive expert guidance wherever you are in India.",
+    "founder_heading": "Meet the Founder",
+    "founder_name": "Nikunn S",
+    "founder_qualification": "B.COM (P.A.)",
+    "founder_role": "Founder & Lead Consultant",
+    "founder_specialisation": "Tax Filing, GST Compliance, Business Registration, Accounting",
+    "founder_bio": "Nikunn S holds a Bachelor of Commerce degree with a specialisation in Professional Accounting. With in-depth expertise in Indian taxation, GST compliance, and business registrations, Nikunn brings precision and dedication to every client engagement \u2014 ensuring the right outcome, the first time.",
+    "values_heading": "Our Values",
+    "reach_heading": "Our Reach",
+    "reach_body": "Our office is based in Thiruchengodu, Namakkal, Tamil Nadu \u2014 but our services reach every corner of India. Thanks to our fully online delivery model, no physical visit is ever required. From the initial consultation to final document delivery, everything is handled securely online."
+  },
+  "values": {
+    "accuracy": { "title": "Accuracy", "desc": "Every filing, report, and submission is carefully verified before it reaches you or the government." },
+    "transparency": { "title": "Transparency", "desc": "Honest advice and clear pricing \u2014 no hidden fees, no surprises." },
+    "compliance": { "title": "Compliance", "desc": "All services are aligned with current Indian tax and regulatory standards." },
+    "accessibility": { "title": "Accessibility", "desc": "Expert financial services made simple and affordable for everyone." },
+    "reliability": { "title": "Reliability", "desc": "We meet every deadline \u2014 your compliance is our responsibility." }
+  },
+  "why_choose": {
+    "heading": "Why Choose Us",
+    "sub": "What sets N Accounts & Tax Consultancy apart.",
+    "items": [
+      { "title": "Expert Professionals", "desc": "Our team holds B.COM (P.A.) qualifications, backed by real-world experience in Indian taxation and compliance." },
+      { "title": "Complete Online Service", "desc": "Consultations, filings, and document handling \u2014 all done 100% online, from anywhere in India." },
+      { "title": "Pan-India Reach", "desc": "Based in Tamil Nadu, we proudly serve clients across every state in India." },
+      { "title": "Accurate & Compliant", "desc": "Every filing is carefully reviewed for accuracy and submitted well within due dates." },
+      { "title": "Affordable Pricing", "desc": "Clear, competitive pricing with absolutely no hidden charges." },
+      { "title": "Client-First Approach", "desc": "Your financial interests come first \u2014 we give honest guidance, always." }
+    ]
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "sub": "Quick answers to common questions about our services.",
+    "still_questions": "Still have questions?",
+    "still_questions_sub": "Reach out to us \u2014 we\u2019re happy to help."
+  },
+  "contact": {
+    "heading": "Get in Touch",
+    "sub": "We\u2019d love to hear from you. Send us a message or reach out directly.",
+    "form_heading": "Send Us a Message",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone / WhatsApp Number",
+      "service": "Service You Are Interested In",
+      "service_placeholder": "Select a service",
+      "general_enquiry": "General Enquiry",
+      "message": "Your Message",
+      "submit": "Send Message",
+      "submitting": "Sending\u2026",
+      "privacy_note": "Your details are safe with us and will never be shared."
+    },
+    "success_heading": "Message Sent!",
+    "success_text": "Thank you for reaching out. We will get back to you within 24 hours.",
+    "details_heading": "Contact Details",
+    "hours_heading": "Office Hours"
+  },
+  "form_errors": {
+    "required_name": "Please enter your name.",
+    "invalid_email": "Please enter a valid email address.",
+    "required_phone": "Please enter your phone number.",
+    "required_message": "Please enter your message."
+  },
+  "stats": {
+    "clients": "Clients Served",
+    "refunds": "Refunds Claimed",
+    "services_count": "Services"
+  },
+  "cookie": {
+    "text": "We use cookies to improve your experience and analyse site traffic.",
+    "accept_all": "Accept All",
+    "necessary_only": "Necessary Only",
+    "learn_more": "Learn More"
+  },
+  "cta": {
+    "call": "Call Us",
+    "whatsapp": "WhatsApp Us",
+    "enquire": "Send an Enquiry",
+    "free_consultation": "Get a Free Consultation",
+    "heading": "Have Questions? We Are Here to Help.",
+    "sub": "Get in touch for a free consultation \u2014 let us understand your needs and guide you to the right solution."
+  },
+  "footer": {
+    "tagline": "Act Wise & Act Precise on Your Finances",
+    "description": "Professional accounting and tax services for individuals and businesses across India.",
+    "quick_links": "Quick Links",
+    "our_services": "Our Services",
+    "contact_us": "Contact Us",
+    "copyright": "\u00a9 2026 N Accounts & Tax Consultancy. All rights reserved."
+  },
+  "breadcrumb": {
+    "home": "Home"
+  }
+}

@@ -1,0 +1,51 @@
+---
+import {
+  GraduationCap,
+  Monitor,
+  MapPin,
+  ShieldCheck,
+  IndianRupee,
+  Heart,
+  CheckCircle,
+} from 'lucide-astro'
+
+interface Props {
+  icon: string
+  title: string
+  desc: string
+  variant?: 'light' | 'dark'
+}
+
+const { icon, title, desc, variant = 'dark' } = Astro.props
+
+// Static icon map — only the icons used by WhyChooseUs.astro (no import *)
+const iconMap: Record<string, any> = {
+  GraduationCap,
+  Monitor,
+  MapPin,
+  ShieldCheck,
+  IndianRupee,
+  Heart,
+  CheckCircle,
+}
+
+const IconComponent = iconMap[icon] ?? CheckCircle
+
+const isDark = variant === 'dark'
+const bgClass = isDark ? 'bg-white/10' : 'bg-white'
+const textClass = isDark ? 'text-white' : 'text-navy'
+const descClass = isDark ? 'text-white/70' : 'text-text-mid'
+const iconBg = isDark ? 'bg-amber/20' : 'bg-amber/10'
+---
+
+<div class={`p-6 rounded-card-lg ${bgClass} ${isDark ? 'hover:bg-white/15' : 'hover:shadow-lg hover:-translate-y-1'} transition-all duration-200`}>
+  <div class={`w-10 h-10 flex items-center justify-center rounded-card ${iconBg} text-amber mb-4`}>
+    <IconComponent class="w-5 h-5" />
+  </div>
+  <h3 class={`font-heading font-semibold text-base ${textClass} mb-2`}>
+    {title}
+  </h3>
+  <p class={`text-sm ${descClass} leading-relaxed`}>
+    {desc}
+  </p>
+</div>

@@ -1,0 +1,26 @@
+---
+import { MessageCircle } from 'lucide-astro'
+---
+
+<a
+  href="https://wa.me/917502979296?text=Hi%20N%20Accounts%2C%20I%20am%20interested%20in%20your%20services."
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-5 right-5 lg:bottom-8 lg:right-8 z-40 group"
+  aria-label="Chat on WhatsApp"
+>
+  <!-- Pulse ring -->
+  <span class="absolute inset-0 rounded-full bg-whatsapp animate-pulse-ring" aria-hidden="true"></span>
+
+  <!-- Button -->
+  <span class="relative flex items-center justify-center w-14 h-14 bg-whatsapp text-white rounded-full shadow-wa group-hover:scale-110 transition-transform duration-200">
+    <MessageCircle class="w-6 h-6" />
+  </span>
+</a>
+
+<script>
+  // Track WhatsApp click
+  document.querySelector('a[aria-label="Chat on WhatsApp"]')?.addEventListener('click', () => {
+    window.dataLayer?.push({ event: 'whatsapp_click', location: 'floating_button' })
+  })
+</script>

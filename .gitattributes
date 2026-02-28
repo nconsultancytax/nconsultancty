@@ -1,0 +1,14 @@
+# Auto-detect for all files
+* text=auto
+
+# Force LF for these (scripts, configs)
+*.sh text eol=lf
+*.json text eol=lf
+
+# Force CRLF for Windows-only files
+*.bat text eol=crlf
+
+# Treat as binary (no conversion)
+*.png binary
+*.jpg binary
+*.woff2 binary

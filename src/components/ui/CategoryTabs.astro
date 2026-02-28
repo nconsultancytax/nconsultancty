@@ -1,0 +1,63 @@
+---
+interface TabItem {
+  id: string
+  label: string
+}
+
+interface Props {
+  tabs: readonly TabItem[] | TabItem[]
+  activeTab?: string
+  dataAttr?: string
+}
+
+const { tabs, activeTab = 'all', dataAttr = 'category' } = Astro.props
+---
+
+<div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter categories">
+  {tabs.map((tab) => (
+    <button
+      role="tab"
+      class={`tab-btn px-4 py-2 text-sm font-medium rounded-pill transition-all duration-200 ${
+        tab.id === activeTab
+          ? 'bg-navy text-white'
+          : 'bg-bg-grey text-text-mid hover:bg-gray-200'
+      }`}
+      data-tab={tab.id}
+      data-filter={dataAttr}
+      aria-selected={tab.id === activeTab ? 'true' : 'false'}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabGroup = btn.getAttribute('data-filter') || 'category'
+      const tabId = btn.getAttribute('data-tab')
+
+      // Update active states within same tab group
+      document.querySelectorAll(`.tab-btn[data-filter="${tabGroup}"]`).forEach((t) => {
+        t.classList.remove('bg-navy', 'text-white')
+        t.classList.add('bg-bg-grey', 'text-text-mid')
+        t.setAttribute('aria-selected', 'false')
+      })
+      btn.classList.remove('bg-bg-grey', 'text-text-mid')
+      btn.classList.add('bg-navy', 'text-white')
+      btn.setAttribute('aria-selected', 'true')
+
+      // Filter items
+      document.querySelectorAll(`[data-${tabGroup}]`).forEach((item) => {
+        if (!(item as HTMLElement).classList.contains('tab-btn')) {
+          const itemCategory = item.getAttribute(`data-${tabGroup}`)
+          if (tabId === 'all' || itemCategory === tabId) {
+            (item as HTMLElement).style.display = ''
+          } else {
+            (item as HTMLElement).style.display = 'none'
+          }
+        }
+      })
+    })
+  })
+</script>

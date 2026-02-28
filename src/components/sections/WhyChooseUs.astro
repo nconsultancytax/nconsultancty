@@ -1,0 +1,35 @@
+---
+import SectionHeading from '@components/ui/SectionHeading.astro'
+import WhyChooseCard from '@components/cards/WhyChooseCard.astro'
+
+const reasons = [
+  { icon: 'GraduationCap', title: 'Expert Professionals', desc: 'Our team holds B.COM (P.A.) qualifications, backed by real-world experience in Indian taxation and compliance.' },
+  { icon: 'Monitor', title: 'Complete Online Service', desc: 'Consultations, filings, and document handling — all done 100% online, from anywhere in India.' },
+  { icon: 'MapPin', title: 'Pan-India Reach', desc: 'Based in Tamil Nadu, we proudly serve clients across every state in India.' },
+  { icon: 'ShieldCheck', title: 'Accurate & Compliant', desc: 'Every filing is carefully reviewed for accuracy and submitted well within due dates.' },
+  { icon: 'IndianRupee', title: 'Affordable Pricing', desc: 'Clear, competitive pricing with absolutely no hidden charges.' },
+  { icon: 'Heart', title: 'Client-First Approach', desc: 'Your financial interests come first — we give honest guidance, always.' },
+]
+---
+
+<section class="section-py bg-navy-gradient">
+  <div class="container">
+    <SectionHeading
+      label="Why Us"
+      heading="Why Choose Us"
+      sub="What sets N Accounts & Tax Consultancy apart."
+      dark={true}
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      {reasons.map((reason) => (
+        <WhyChooseCard
+          icon={reason.icon}
+          title={reason.title}
+          desc={reason.desc}
+          variant="dark"
+        />
+      ))}
+    </div>
+  </div>
+</section>

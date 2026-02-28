@@ -1,0 +1,70 @@
+---
+// Server-side defaults to English; client JS switches dynamically
+---
+
+<div class="flex items-center bg-bg-grey rounded-pill p-0.5 text-xs font-medium">
+  <button
+    id="lang-en"
+    class="lang-btn px-2.5 py-1 rounded-pill transition-all duration-200 bg-navy text-white"
+    data-lang="en"
+    aria-label="Switch to English"
+  >
+    EN
+  </button>
+  <button
+    id="lang-ta"
+    class="lang-btn px-2.5 py-1 rounded-pill transition-all duration-200 text-text-mid"
+    data-lang="ta"
+    aria-label="Switch to Tamil"
+  >
+    தமிழ்
+  </button>
+</div>
+
+<script>
+  function initLangToggle() {
+    const btnEn = document.getElementById('lang-en')
+    const btnTa = document.getElementById('lang-ta')
+    if (!btnEn || !btnTa) return
+
+    const currentLang = localStorage.getItem('nacctax_lang') || 'en'
+    setActiveState(currentLang)
+
+    btnEn.addEventListener('click', () => switchLang('en'))
+    btnTa.addEventListener('click', () => switchLang('ta'))
+
+    function setActiveState(lang: string) {
+      if (lang === 'ta') {
+        btnTa?.classList.add('bg-navy', 'text-white')
+        btnTa?.classList.remove('text-text-mid')
+        btnEn?.classList.remove('bg-navy', 'text-white')
+        btnEn?.classList.add('text-text-mid')
+      } else {
+        btnEn?.classList.add('bg-navy', 'text-white')
+        btnEn?.classList.remove('text-text-mid')
+        btnTa?.classList.remove('bg-navy', 'text-white')
+        btnTa?.classList.add('text-text-mid')
+      }
+    }
+
+    function switchLang(lang: string) {
+      localStorage.setItem('nacctax_lang', lang)
+      document.documentElement.setAttribute('lang', lang)
+      setActiveState(lang)
+
+      // Update URL param without full reload
+      const url = new URL(window.location.href)
+      if (lang === 'en') {
+        url.searchParams.delete('lang')
+      } else {
+        url.searchParams.set('lang', lang)
+      }
+      window.history.replaceState({}, '', url.toString())
+
+      // Fire analytics event
+      window.dataLayer?.push({ event: 'language_toggle', to_language: lang })
+    }
+  }
+
+  initLangToggle()
+</script>

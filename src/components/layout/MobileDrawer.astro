@@ -1,0 +1,142 @@
+---
+import { mainNav, contactInfo } from '@data/navigation'
+import { Phone, MessageCircle, X, ChevronDown } from 'lucide-astro'
+---
+
+<!-- Overlay -->
+<div
+  id="mobile-overlay"
+  class="fixed inset-0 z-50 bg-black/50 hidden"
+  aria-hidden="true"
+></div>
+
+<!-- Drawer -->
+<nav
+  id="mobile-drawer"
+  class="fixed top-0 right-0 z-50 w-[85%] max-w-sm h-full bg-navy text-white translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+  aria-label="Mobile navigation"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Header -->
+  <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+    <span class="font-heading font-bold text-lg">
+      N Accounts<span class="text-amber">&</span>Tax
+    </span>
+    <button
+      id="mobile-close-btn"
+      class="p-2 -mr-2 text-white/80 hover:text-white"
+      aria-label="Close menu"
+    >
+      <X class="w-6 h-6" />
+    </button>
+  </div>
+
+  <!-- Nav links -->
+  <ul class="px-5 py-4 space-y-1">
+    {mainNav.map((item) => (
+      item.children ? (
+        <li>
+          <button
+            class="mobile-accordion-btn flex items-center justify-between w-full py-3 text-base font-medium hover:text-amber transition-colors"
+            aria-expanded="false"
+          >
+            {item.label}
+            <ChevronDown class="w-4 h-4 transition-transform" />
+          </button>
+          <ul class="mobile-accordion-panel hidden pl-4 pb-2 space-y-1">
+            {item.children.map((child) => (
+              <li>
+                <a
+                  href={child.href}
+                  class="block py-2 text-sm text-white/70 hover:text-amber transition-colors"
+                >
+                  {child.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href={item.href}
+                class="block py-2 text-sm font-semibold text-amber hover:text-amber/80 transition-colors"
+              >
+                View All Services &rarr;
+              </a>
+            </li>
+          </ul>
+        </li>
+      ) : (
+        <li>
+          <a
+            href={item.href}
+            class="block py-3 text-base font-medium hover:text-amber transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      )
+    ))}
+  </ul>
+
+  <!-- Bottom CTA buttons -->
+  <div class="px-5 py-4 mt-auto border-t border-white/10 space-y-3">
+    <a
+      href={contactInfo.phoneHref}
+      class="flex items-center justify-center gap-2 w-full py-3 bg-white text-navy font-semibold rounded-pill hover:bg-gray-100 transition-colors"
+    >
+      <Phone class="w-4 h-4" />
+      Call Us
+    </a>
+    <a
+      href={`https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent('Hi N Accounts, I am interested in your services.')}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-center gap-2 w-full py-3 bg-whatsapp text-white font-semibold rounded-pill hover:opacity-90 transition-opacity"
+    >
+      <MessageCircle class="w-4 h-4" />
+      WhatsApp Us
+    </a>
+  </div>
+</nav>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn')
+  const closeBtn = document.getElementById('mobile-close-btn')
+  const drawer = document.getElementById('mobile-drawer')
+  const overlay = document.getElementById('mobile-overlay')
+
+  function openDrawer() {
+    drawer?.classList.remove('translate-x-full')
+    overlay?.classList.remove('hidden')
+    document.body.style.overflow = 'hidden'
+    menuBtn?.setAttribute('aria-expanded', 'true')
+  }
+
+  function closeDrawer() {
+    drawer?.classList.add('translate-x-full')
+    overlay?.classList.add('hidden')
+    document.body.style.overflow = ''
+    menuBtn?.setAttribute('aria-expanded', 'false')
+  }
+
+  menuBtn?.addEventListener('click', openDrawer)
+  closeBtn?.addEventListener('click', closeDrawer)
+  overlay?.addEventListener('click', closeDrawer)
+
+  // Services accordion in mobile drawer
+  document.querySelectorAll('.mobile-accordion-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.nextElementSibling as HTMLElement
+      const expanded = btn.getAttribute('aria-expanded') === 'true'
+      btn.setAttribute('aria-expanded', String(!expanded))
+      panel?.classList.toggle('hidden')
+      const icon = btn.querySelector('svg')
+      icon?.classList.toggle('rotate-180')
+    })
+  })
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer()
+  })
+</script>

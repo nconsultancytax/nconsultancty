@@ -1,0 +1,50 @@
+---
+import PageLayout from './PageLayout.astro'
+import Breadcrumb from '@components/layout/Breadcrumb.astro'
+import PageHero from '@components/sections/PageHero.astro'
+import ServiceSidebar from '@components/ui/ServiceSidebar.astro'
+import MobileCTABar from '@components/ui/MobileCTABar.astro'
+import CtaBanner from '@components/sections/CtaBanner.astro'
+
+interface Props {
+  title: string
+  description?: string
+  serviceName: string
+  serviceSlug: string
+}
+
+const { title, description, serviceName, serviceSlug } = Astro.props
+
+const breadcrumbItems = [
+  { label: 'Services', href: '/services/' },
+  { label: serviceName, href: '' },
+]
+---
+
+<PageLayout title={title} description={description}>
+  <!-- Page hero -->
+  <PageHero heading={serviceName} breadcrumbItems={breadcrumbItems} />
+
+  <!-- Two-column content area -->
+  <section class="section-py">
+    <div class="container">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <!-- Main content (left) -->
+        <div class="w-full lg:w-[65%]">
+          <slot />
+        </div>
+
+        <!-- Sticky sidebar (right — desktop only) -->
+        <aside class="hidden lg:block lg:w-[35%]">
+          <ServiceSidebar serviceSlug={serviceSlug} />
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <CtaBanner />
+
+  <!-- Mobile sticky CTA bar -->
+  <MobileCTABar serviceSlug={serviceSlug} />
+</PageLayout>

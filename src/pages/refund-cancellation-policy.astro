@@ -1,0 +1,36 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PageHero from '@components/sections/PageHero.astro'
+
+const breadcrumbItems = [{ label: 'Refund & Cancellation Policy', href: '' }]
+---
+
+<PageLayout title="Refund & Cancellation Policy" description="Refund and cancellation policy for N Accounts & Tax Consultancy services.">
+  <PageHero heading="Refund & Cancellation Policy" sub="Last updated: February 2026" breadcrumbItems={breadcrumbItems} />
+
+  <section class="section-py bg-white">
+    <div class="container max-w-3xl">
+      <div class="prose prose-navy max-w-none space-y-8">
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">1. Cancellation</h2>
+          <p class="text-sm text-text-mid leading-relaxed">Service cancellation must be requested before work has commenced. Once our team has begun working on your request (document review, form preparation, or filing), cancellation may not be possible or may attract a partial charge.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">2. Refund Eligibility</h2>
+          <p class="text-sm text-text-mid leading-relaxed">A full refund is applicable if cancellation is requested before any work has begun. A partial refund may be offered if work is in progress, calculated based on the stage of completion. No refund is applicable on government fees already paid on the client's behalf.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">3. Refund Processing</h2>
+          <p class="text-sm text-text-mid leading-relaxed">Approved refunds will be processed within 7 to 10 working days and credited to the original payment method used by the client.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">4. Government Fee Disclaimer</h2>
+          <p class="text-sm text-text-mid leading-relaxed">Government filing fees, stamp duty, and other statutory charges paid on your behalf are non-refundable, as these are charged by the respective government authority and cannot be recovered.</p>
+        </div>
+        <div class="bg-bg-light rounded-card p-5">
+          <p class="text-sm text-text-mid">For refund requests, email us at <a href="mailto:nconsultancy.tax@gmail.com" class="text-amber hover:text-amber-dark">nconsultancy.tax@gmail.com</a> or call +91 7502979296.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,226 @@
+/* =========================================================
+   N Accounts & Tax Consultancy — Global Styles
+   Stack: Astro v5 + Tailwind CSS v3
+   ========================================================= */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base resets ----------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* base — never change; use rem/em for sizing */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1F2937;         /* text-dark */
+    background-color: #ffffff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tamil language font override */
+  html[lang="ta"] body {
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+
+  /* Headings use Poppins */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.25;
+    color: #1F2937;
+  }
+
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Form elements — min 16px prevents iOS zoom */
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: 1rem; /* 16px minimum */
+  }
+
+  /* Focus visible — accessibility */
+  :focus-visible {
+    outline: 2px solid #D97706;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Selection colour */
+  ::selection {
+    background-color: #D97706;
+    color: #ffffff;
+  }
+}
+
+/* --- Component utilities --------------------------------- */
+@layer components {
+  /* Container — max 1200px centred */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;    /* 16px mobile */
+    padding-right: 1rem;
+  }
+
+  @screen md {
+    .container {
+      padding-left: 1.5rem; /* 24px tablet */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @screen xl {
+    .container {
+      padding-left: 2rem;   /* 32px desktop */
+      padding-right: 2rem;
+    }
+  }
+
+  /* Section padding rhythm */
+  .section-py {
+    padding-top: 4rem;     /* 64px mobile */
+    padding-bottom: 4rem;
+  }
+
+  @screen md {
+    .section-py {
+      padding-top: 5rem;   /* 80px tablet */
+      padding-bottom: 5rem;
+    }
+  }
+
+  @screen lg {
+    .section-py {
+      padding-top: 6rem;   /* 96px desktop */
+      padding-bottom: 6rem;
+    }
+  }
+
+  /* Navy gradient background (hero + dark sections) */
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, #1B2D5B 0%, #243B6E 100%);
+  }
+
+  /* Amber gradient background (CTA banners) */
+  .bg-amber-gradient {
+    background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  }
+
+  /* Card base style */
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-heading font-semibold text-white bg-amber rounded-pill transition-all duration-200;
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.35);
+  }
+
+  .btn-primary:hover {
+    @apply bg-amber-dark;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-heading font-semibold text-navy border-2 border-navy rounded-pill transition-all duration-200;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-navy text-white;
+  }
+
+  /* Ghost button (white outline — on dark backgrounds) */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-heading font-semibold text-white border-2 border-white rounded-pill transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-white text-navy;
+  }
+
+  /* Section heading label pill */
+  .label-pill {
+    @apply inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-pill text-amber bg-amber/10;
+  }
+
+  /* Star rating */
+  .star-filled {
+    color: #F59E0B;
+  }
+
+  .star-empty {
+    color: #D1D5DB;
+  }
+}
+
+/* --- Utility layer additions ----------------------------- */
+@layer utilities {
+  /* Hide scrollbar — used for horizontal carousels */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Text balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text */
+  .text-gradient-amber {
+    background: linear-gradient(135deg, #D97706, #B45309);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Geometric hero pattern overlay */
+  .hero-pattern {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(217,119,6,0.08) 0%, transparent 40%);
+  }
+}

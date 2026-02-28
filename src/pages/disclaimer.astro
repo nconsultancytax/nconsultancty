@@ -1,0 +1,32 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PageHero from '@components/sections/PageHero.astro'
+
+const breadcrumbItems = [{ label: 'Disclaimer', href: '' }]
+---
+
+<PageLayout title="Disclaimer" description="Disclaimer for N Accounts & Tax Consultancy services and website content.">
+  <PageHero heading="Disclaimer" sub="Last updated: February 2026" breadcrumbItems={breadcrumbItems} />
+
+  <section class="section-py bg-white">
+    <div class="container max-w-3xl">
+      <div class="prose prose-navy max-w-none space-y-8">
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">1. Nature of Services</h2>
+          <p class="text-sm text-text-mid leading-relaxed">The services provided by N Accounts & Tax Consultancy are for tax compliance assistance, accounting, and business registration support only. Our services are not a substitute for a Chartered Accountant for complex audits, corporate matters, or litigation.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">2. No Guarantee of Outcomes</h2>
+          <p class="text-sm text-text-mid leading-relaxed">While we strive for accuracy and compliance in every filing, outcomes and timelines are subject to government portal processing. We are not responsible for delays caused by government systems or incomplete client submissions.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-semibold text-xl text-navy mb-3">3. Website Content</h2>
+          <p class="text-sm text-text-mid leading-relaxed">The information on this website is provided for general informational purposes only and does not constitute professional tax or legal advice. For advice specific to your situation, please consult with us directly.</p>
+        </div>
+        <div class="bg-bg-light rounded-card p-5">
+          <p class="text-sm text-text-mid">Questions? Email us at <a href="mailto:nconsultancy.tax@gmail.com" class="text-amber hover:text-amber-dark">nconsultancy.tax@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

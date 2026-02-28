@@ -1,0 +1,51 @@
+---
+import { services } from '@data/services'
+import ServiceCard from '@components/cards/ServiceCard.astro'
+import SectionHeading from '@components/ui/SectionHeading.astro'
+
+interface Props {
+  limit?: number
+  showHeading?: boolean
+}
+
+const { limit, showHeading = true } = Astro.props
+const displayServices = limit ? services.slice(0, limit) : services
+---
+
+<section class="section-py bg-bg-light">
+  <div class="container">
+    {showHeading && (
+      <SectionHeading
+        label="What We Offer"
+        heading="Our Services"
+        sub="Expert tax, accounting, and registration services — all under one roof."
+      />
+    )}
+
+    <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+      {displayServices.map((service) => (
+        <ServiceCard
+          name={service.name}
+          slug={service.slug}
+          icon={service.icon}
+          shortDesc={service.shortDesc}
+          category={service.category}
+        />
+      ))}
+    </div>
+
+    {limit && limit < services.length && (
+      <div class="text-center mt-8">
+        <a
+          href="/services/"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber hover:text-amber-dark transition-colors"
+        >
+          View All Services
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

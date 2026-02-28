@@ -1,0 +1,59 @@
+---
+import PageLayout from '@layouts/PageLayout.astro'
+import PageHero from '@components/sections/PageHero.astro'
+import CategoryTabs from '@components/ui/CategoryTabs.astro'
+import ServiceCard from '@components/cards/ServiceCard.astro'
+import CtaBanner from '@components/sections/CtaBanner.astro'
+import { services, serviceCategories } from '@data/services'
+import { MessageCircle } from 'lucide-astro'
+
+const breadcrumbItems = [{ label: 'Services', href: '' }]
+---
+
+<PageLayout
+  title="Our Services"
+  description="Explore 12+ professional tax, accounting, and business registration services. GST filing, ITR, company registration, and more \u2014 all 100% online."
+>
+  <PageHero
+    heading="Our Services"
+    sub="Expert tax, accounting, and registration services \u2014 all under one roof."
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <section class="section-py bg-bg-light">
+    <div class="container">
+      <CategoryTabs tabs={serviceCategories} activeTab="all" dataAttr="category" />
+
+      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+        {services.map((service) => (
+          <ServiceCard
+            name={service.name}
+            slug={service.slug}
+            icon={service.icon}
+            shortDesc={service.shortDesc}
+            category={service.category}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Not sure CTA -->
+  <section class="bg-bg-grey border-y border-gray-200">
+    <div class="container py-10 text-center">
+      <h2 class="font-heading font-semibold text-xl text-navy mb-2">Not sure which service you need?</h2>
+      <p class="text-sm text-text-mid mb-5">Contact us for a free consultation &mdash; we'll guide you to the right solution.</p>
+      <a
+        href="https://wa.me/917502979296?text=Hi%20N%20Accounts%2C%20I%20need%20help%20choosing%20the%20right%20service."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary inline-flex items-center gap-2"
+      >
+        <MessageCircle class="w-4 h-4" />
+        WhatsApp Us
+      </a>
+    </div>
+  </section>
+
+  <CtaBanner />
+</PageLayout>

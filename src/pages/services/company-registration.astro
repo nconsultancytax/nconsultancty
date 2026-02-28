@@ -1,0 +1,61 @@
+---
+import ServiceLayout from '@layouts/ServiceLayout.astro'
+import { getServiceBySlug, getRelatedServices } from '@data/services'
+import ServiceCard from '@components/cards/ServiceCard.astro'
+import { CheckCircle } from 'lucide-astro'
+
+const service = getServiceBySlug('company-registration')!
+const related = getRelatedServices('company-registration', 3)
+---
+
+<ServiceLayout
+  title={service.name}
+  description={service.shortDesc}
+  serviceName={service.name}
+  serviceSlug={service.slug}
+>
+  <!-- Full description -->
+  <div class="prose prose-navy max-w-none">
+    <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy mb-4">
+      {service.name}
+    </h2>
+    <p class="text-base text-text-mid leading-relaxed mb-8">
+      {service.fullDesc}
+    </p>
+  </div>
+
+  <!-- What's Included -->
+  <div class="mb-10">
+    <h3 class="font-heading font-semibold text-lg text-navy mb-4">
+      What's Included
+    </h3>
+    <ul class="space-y-3">
+      {service.inclusions.map((item) => (
+        <li class="flex items-start gap-3 text-sm text-text-dark">
+          <CheckCircle class="w-5 h-5 text-success shrink-0 mt-0.5" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Related Services -->
+  {related.length > 0 && (
+    <div class="pt-8 border-t border-gray-200">
+      <h3 class="font-heading font-semibold text-lg text-navy mb-6">
+        Related Services
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {related.map((s) => (
+          <ServiceCard
+            name={s.name}
+            slug={s.slug}
+            icon={s.icon}
+            shortDesc={s.shortDesc}
+            category={s.category}
+          />
+        ))}
+      </div>
+    </div>
+  )}
+</ServiceLayout>

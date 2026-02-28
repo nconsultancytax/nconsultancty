@@ -1,0 +1,72 @@
+---
+import {
+  ArrowRight,
+  FileText,
+  Calculator,
+  FileCheck,
+  BarChart3,
+  BookOpen,
+  Building2,
+  Handshake,
+  Globe,
+  Award,
+  KeyRound,
+  CreditCard,
+  Shield,
+} from 'lucide-astro'
+
+interface Props {
+  name: string
+  slug: string
+  icon: string
+  shortDesc: string
+  category: string
+}
+
+const { name, slug, icon, shortDesc, category } = Astro.props
+
+// Static icon map — only the icons used by services.ts (no import *)
+const iconMap: Record<string, any> = {
+  FileText,
+  Calculator,
+  FileCheck,
+  BarChart3,
+  BookOpen,
+  Building2,
+  Handshake,
+  Globe,
+  Award,
+  KeyRound,
+  CreditCard,
+  Shield,
+}
+
+const IconComponent = iconMap[icon] ?? FileText
+---
+
+<a
+  href={`/services/${slug}/`}
+  class="card group block p-6 border border-gray-200 hover:border-amber transition-all duration-200"
+  data-category={category}
+>
+  <!-- Icon -->
+  <div class="w-12 h-12 flex items-center justify-center rounded-card bg-amber/10 text-amber mb-4 group-hover:bg-amber group-hover:text-white transition-all duration-200">
+    <IconComponent class="w-6 h-6" />
+  </div>
+
+  <!-- Title -->
+  <h3 class="font-heading font-semibold text-base text-navy mb-2 group-hover:text-amber transition-colors">
+    {name}
+  </h3>
+
+  <!-- Description -->
+  <p class="text-sm text-text-mid leading-relaxed line-clamp-2 mb-4">
+    {shortDesc}
+  </p>
+
+  <!-- CTA -->
+  <span class="inline-flex items-center gap-1 text-sm font-medium text-amber group-hover:gap-2 transition-all duration-200">
+    Enquire
+    <ArrowRight class="w-3.5 h-3.5" />
+  </span>
+</a>
