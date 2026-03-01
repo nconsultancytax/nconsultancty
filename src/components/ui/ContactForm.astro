@@ -1,6 +1,7 @@
 ---
 import { services } from '@data/services'
 import { Send, Loader2, Lock } from 'lucide-astro'
+
 ---
 
 <style>
@@ -27,6 +28,8 @@ import { Send, Loader2, Lock } from 'lucide-astro'
   class="space-y-5"
   novalidate
 >
+  <input type="hidden" id="cf-access-key" value="22c07f19-9dea-4ed3-a9f1-de04c06533bc" />
+
   <!-- Name -->
   <div>
     <label for="cf-name" class="block text-sm font-medium text-text-dark mb-1.5">
@@ -193,7 +196,7 @@ import { Send, Loader2, Lock } from 'lucide-astro'
       submitBtn.disabled = true
 
       try {
-        const apiKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? ''
+        const apikey = (form.querySelector('#cf-access-key') as HTMLInputElement).value.trim();
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
