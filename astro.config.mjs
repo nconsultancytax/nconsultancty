@@ -3,12 +3,18 @@ import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.naccountstax.com', // replace with final domain
+  // replace with final domain
+  site: 'https://www.naccountstax.com',
+
   integrations: [
     tailwind(),
     sitemap()
   ],
-  output: 'static'
+
+  output: 'static',
+  adapter: cloudflare()
 })
