@@ -196,12 +196,12 @@ import { Send, Loader2, Lock } from 'lucide-astro'
       submitBtn.disabled = true
 
       try {
-        const apikey = (form.querySelector('#cf-access-key') as HTMLInputElement).value.trim();
+        const accessKey = (form.querySelector('#cf-access-key') as HTMLInputElement).value.trim();
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            access_key: apiKey,
+            access_key: accessKey,
             subject: 'New Enquiry — N Accounts & Tax Consultancy',
             name,
             email,
