@@ -80,14 +80,4 @@ export const legalLinks = [
   { label: 'Refund & Cancellation', href: '/refund-cancellation-policy/' },
 ]
 
-export const contactInfo = {
-  phone: '+91 7502979296',
-  phoneHref: 'tel:+917502979296',
-  whatsappNumber: '917502979296',
-  email: 'nconsultancy.tax@gmail.com',
-  address: 'L-71, PCM Complex, Koottappalli Colony, Thiruchengodu, Namakkal \u2013 637214, Tamil Nadu',
-  officeHours: {
-    weekdays: 'Mon \u2013 Sat: 9:00 AM \u2013 6:00 PM',
-    weekend: 'Sun: WhatsApp only',
-  },
-}
+export { contact as contactInfo } from './contact'

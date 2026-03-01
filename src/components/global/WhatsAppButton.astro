@@ -1,9 +1,10 @@
 ---
 import { MessageCircle } from 'lucide-astro'
+import { contact } from '@data/contact'
 ---
 
 <a
-  href="https://wa.me/917502979296?text=Hi%20N%20Accounts%2C%20I%20am%20interested%20in%20your%20services."
+  href={`https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent('Hi N Accounts, I am interested in your services.')}`}
   target="_blank"
   rel="noopener noreferrer"
   class="fixed bottom-5 right-5 lg:bottom-8 lg:right-8 z-40 group"
