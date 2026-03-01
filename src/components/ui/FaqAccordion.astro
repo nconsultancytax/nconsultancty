@@ -10,17 +10,54 @@ interface Props {
 const { items, firstOpen = true } = Astro.props
 ---
 
-<div class="divide-y divide-gray-200">
+<style>
+  /*
+    FaqAccordion — hover and colour states via CSS variables.
+    Tailwind handles: layout, padding, sizing, transitions.
+    CSS variables handle: divider colour, text colour on hover.
+    Replaces group-hover:* Tailwind utilities.
+  */
+
+  /* Divider between FAQ items */
+  .faq-list > * + * {
+    border-top: 1px solid var(--faq-divider);
+  }
+
+  /* Question text */
+  .faq-question {
+    color: var(--faq-question-color);
+    transition: color 0.2s ease;
+  }
+  .faq-trigger:hover .faq-question {
+    color: var(--faq-question-hover);
+  }
+
+  /* Icon */
+  .faq-icon {
+    color: var(--faq-icon-color);
+    transition: color 0.2s ease;
+  }
+  .faq-trigger:hover .faq-icon {
+    color: var(--faq-icon-hover);
+  }
+
+  /* Answer text */
+  .faq-answer {
+    color: var(--faq-answer-color);
+  }
+</style>
+
+<div class="faq-list">
   {items.map((item, index) => (
     <div class="faq-item" data-faq-id={item.id}>
       <button
-        class="faq-trigger flex items-center justify-between w-full py-5 text-left group"
+        class="faq-trigger flex items-center justify-between w-full py-5 text-left"
         aria-expanded={firstOpen && index === 0 ? 'true' : 'false'}
       >
-        <span class="font-heading font-semibold text-base text-navy group-hover:text-amber transition-colors pr-4">
+        <span class="faq-question font-heading font-semibold text-base pr-4">
           {item.question}
         </span>
-        <span class="shrink-0 w-6 h-6 flex items-center justify-center text-text-mid group-hover:text-amber transition-colors">
+        <span class="faq-icon shrink-0 w-6 h-6 flex items-center justify-center">
           <Plus class="w-5 h-5 faq-icon-plus" />
           <Minus class="w-5 h-5 faq-icon-minus hidden" />
         </span>
@@ -30,7 +67,7 @@ const { items, firstOpen = true } = Astro.props
           firstOpen && index === 0 ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <p class="pb-5 text-sm text-text-mid leading-relaxed">
+        <p class="faq-answer pb-5 text-sm leading-relaxed">
           {item.answer}
         </p>
       </div>

@@ -44,28 +44,69 @@ const iconMap: Record<string, any> = {
 const IconComponent = iconMap[icon] ?? FileText
 ---
 
+<style>
+  /*
+    ServiceCard — hover state colours via CSS variables.
+    Tailwind handles: layout, spacing, sizing, border-width, transitions.
+    CSS variables handle: colour changes on hover (replacing group-hover:* utilities).
+  */
+
+  .svc-card {
+    border-color: var(--svc-card-border);
+  }
+  .svc-card:hover {
+    border-color: var(--svc-card-border-hover);
+  }
+
+  .svc-icon-wrap {
+    background-color: var(--svc-card-icon-bg);
+    color: var(--svc-card-icon-color);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .svc-card:hover .svc-icon-wrap {
+    background-color: var(--svc-card-icon-bg-hover);
+    color: var(--svc-card-icon-color-hover);
+  }
+
+  .svc-title {
+    color: var(--svc-card-title-color);
+    transition: color 0.2s ease;
+  }
+  .svc-card:hover .svc-title {
+    color: var(--svc-card-title-hover);
+  }
+
+  .svc-desc {
+    color: var(--svc-card-desc-color);
+  }
+
+  .svc-cta {
+    color: var(--svc-card-cta-color);
+  }
+</style>
+
 <a
   href={`/services/${slug}/`}
-  class="card group block p-6 border border-gray-200 hover:border-amber transition-all duration-200"
+  class="card svc-card group block p-6 border transition-all duration-200"
   data-category={category}
 >
   <!-- Icon -->
-  <div class="w-12 h-12 flex items-center justify-center rounded-card bg-amber/10 text-amber mb-4 group-hover:bg-amber group-hover:text-white transition-all duration-200">
+  <div class="svc-icon-wrap w-12 h-12 flex items-center justify-center rounded-card mb-4">
     <IconComponent class="w-6 h-6" />
   </div>
 
   <!-- Title -->
-  <h3 class="font-heading font-semibold text-base text-navy mb-2 group-hover:text-amber transition-colors">
+  <h3 class="svc-title font-heading font-semibold text-base mb-2">
     {name}
   </h3>
 
   <!-- Description -->
-  <p class="text-sm text-text-mid leading-relaxed line-clamp-2 mb-4">
+  <p class="svc-desc text-sm leading-relaxed line-clamp-2 mb-4">
     {shortDesc}
   </p>
 
   <!-- CTA -->
-  <span class="inline-flex items-center gap-1 text-sm font-medium text-amber group-hover:gap-2 transition-all duration-200">
+  <span class="svc-cta inline-flex items-center gap-1 text-sm font-medium group-hover:gap-2 transition-all duration-200">
     Enquire
     <ArrowRight class="w-3.5 h-3.5" />
   </span>
