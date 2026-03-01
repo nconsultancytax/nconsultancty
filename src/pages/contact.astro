@@ -6,7 +6,7 @@ import { contactInfo } from '@data/navigation'
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-astro'
 
 const breadcrumbItems = [{ label: 'Contact', href: '' }]
-const mapsUrl = import.meta.env.PUBLIC_MAPS_EMBED_URL || ''
+const mapsUrl = contactInfo.mapsEmbedUrl
 ---
 
 <PageLayout
@@ -63,15 +63,20 @@ const mapsUrl = import.meta.env.PUBLIC_MAPS_EMBED_URL || ''
             </a>
 
             <!-- Address -->
-            <div class="flex items-start gap-4 p-4 bg-bg-light rounded-card">
+            <a
+              href={contactInfo.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-4 p-4 bg-bg-light rounded-card hover:shadow-md transition-all duration-200 group"
+            >
               <div class="w-10 h-10 flex items-center justify-center rounded-full bg-amber/10 text-amber shrink-0">
                 <MapPin class="w-5 h-5" />
               </div>
               <div>
-                <p class="text-sm font-medium text-navy">Office Address</p>
+                <p class="text-sm font-medium text-navy group-hover:text-amber transition-colors">Office Address</p>
                 <p class="text-sm text-text-mid">{contactInfo.address}</p>
               </div>
-            </div>
+            </a>
 
             <!-- Office Hours -->
             <div class="flex items-start gap-4 p-4 bg-bg-light rounded-card">

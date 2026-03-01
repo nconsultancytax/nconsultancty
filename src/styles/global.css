@@ -3,6 +3,313 @@
    Stack: Astro v5 + Tailwind CSS v3
    ========================================================= */
 
+/* =========================================================
+   CSS CUSTOM PROPERTIES — Design Token System
+   All design tokens are declared here.
+   Component styling references these via var(--token-name).
+
+   Two-layer architecture:
+     Layer 1  --color-*          Semantic theme colors (raw hex lives here only)
+     Layer 2  --btn-*, --card-*… Component tokens (reference Layer 1)
+   ========================================================= */
+:root {
+
+  /* -------------------------------------------------------
+     GROUP 1 — SEMANTIC THEME COLORS
+     Named by role/purpose, not by appearance.
+     Change --color-primary once to re-theme the whole site.
+     ------------------------------------------------------- */
+
+  /* Brand — primary (currently navy) */
+  --color-primary:          #1B2D5B;
+  --color-primary-dark:     #243B6E;
+
+  /* Brand — accent / CTA (currently amber) */
+  --color-accent:           #D97706;
+  --color-accent-dark:      #B45309;
+  --color-accent-darker:    #92400E;
+
+  /* Text scale */
+  --color-text:             #1F2937;   /* primary body text */
+  --color-text-muted:       #6B7280;   /* secondary / helper text */
+  --color-text-subtle:      #4B5563;   /* tertiary text */
+  --color-text-inverse:     #FFFFFF;   /* text on dark/primary surfaces */
+
+  /* Surfaces (backgrounds) */
+  --color-surface:          #FFFFFF;   /* page / card background */
+  --color-surface-alt:      #F9FAFB;   /* alternate light surface */
+  --color-surface-muted:    #F3F4F6;   /* muted / grey surface */
+
+  /* Borders */
+  --color-border:           #E5E7EB;   /* default border */
+  --color-border-strong:    #D1D5DB;   /* stronger border */
+  --color-border-subtle:    #F3F4F6;   /* very subtle border */
+
+  /* Status */
+  --color-success:          #10B981;
+  --color-error:            #EF4444;
+  --color-info:             #3B82F6;
+  --color-whatsapp:         #25D366;
+
+  /* -------------------------------------------------------
+     GROUP 2 — DESIGN PROPERTIES
+     Typography, spacing, radii, shadows, transitions, gradients.
+     ------------------------------------------------------- */
+
+  /* Typography families */
+  --font-heading:           'Poppins', sans-serif;
+  --font-body:              'Inter', sans-serif;
+  --font-tamil:             'Noto Sans Tamil', sans-serif;
+
+  /* Container */
+  --space-container-max:        1200px;
+  --space-container-px-mobile:  1rem;
+  --space-container-px-tablet:  1.5rem;
+  --space-container-px-desktop: 2rem;
+
+  /* Section vertical rhythm */
+  --space-section-py-mobile:    4rem;
+  --space-section-py-tablet:    5rem;
+  --space-section-py-desktop:   6rem;
+
+  /* Border radii */
+  --radius-default:         6px;
+  --radius-card:            12px;
+  --radius-card-lg:         16px;
+  --radius-pill:            9999px;
+
+  /* Box shadows */
+  --shadow-sm:              0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:              0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg:              0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:              0 16px 40px rgba(0, 0, 0, 0.15);
+  --shadow-accent:          0 4px 16px rgba(217, 119, 6, 0.35);
+  --shadow-accent-hover:    0 6px 20px rgba(217, 119, 6, 0.45);
+  --shadow-nav:             0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-wa:              0 4px 16px rgba(37, 211, 102, 0.40);
+
+  /* Transitions */
+  --transition-fast:        all 0.2s ease;
+  --transition-medium:      all 0.3s ease;
+
+  /* Gradients */
+  --gradient-primary:       linear-gradient(135deg, #1B2D5B 0%, #243B6E 100%);
+  --gradient-accent:        linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  --gradient-text-accent:   linear-gradient(135deg, #D97706, #B45309);
+
+  /* Focus ring */
+  --focus-color:            var(--color-accent);
+  --focus-offset:           2px;
+  --focus-radius:           4px;
+
+  /* -------------------------------------------------------
+     GROUP 3 — BUTTON TOKENS
+     All button variants with default, hover, and shadow states.
+     ------------------------------------------------------- */
+
+  /* Primary button (accent background) */
+  --btn-primary-bg:           var(--color-accent);
+  --btn-primary-bg-hover:     var(--color-accent-dark);
+  --btn-primary-text:         var(--color-text-inverse);
+  --btn-primary-shadow:       var(--shadow-accent);
+  --btn-primary-shadow-hover: var(--shadow-accent-hover);
+
+  /* Secondary button (primary brand outline) */
+  --btn-secondary-border:     var(--color-primary);
+  --btn-secondary-text:       var(--color-primary);
+  --btn-secondary-bg-hover:   var(--color-primary);
+  --btn-secondary-text-hover: var(--color-text-inverse);
+
+  /* Ghost button (for use on primary/dark backgrounds) */
+  --btn-ghost-border:         var(--color-text-inverse);
+  --btn-ghost-text:           var(--color-text-inverse);
+  --btn-ghost-bg-hover:       var(--color-text-inverse);
+  --btn-ghost-text-hover:     var(--color-primary);
+
+  /* WhatsApp button */
+  --btn-wa-bg:                var(--color-whatsapp);
+  --btn-wa-text:              var(--color-text-inverse);
+  --btn-wa-shadow:            var(--shadow-wa);
+
+  /* Shared button properties */
+  --btn-radius:               var(--radius-pill);
+  --btn-transition:           var(--transition-fast);
+
+  /* -------------------------------------------------------
+     GROUP 4 — LAYOUT COMPONENT TOKENS
+     Header and Footer.
+     ------------------------------------------------------- */
+
+  /* Header */
+  --header-bg:              var(--color-surface);
+  --header-text:            var(--color-text);
+  --header-nav-color:       var(--color-text);
+  --header-nav-hover:       var(--color-accent);
+  --header-logo-accent:     var(--color-accent);
+  --header-shadow:          var(--shadow-nav);
+  --header-height-mobile:   3.75rem;   /* 60px */
+  --header-height-desktop:  4.5rem;    /* 72px */
+
+  /* Footer (sits on primary brand background) */
+  --footer-bg:              var(--color-primary);
+  --footer-text-primary:    var(--color-text-inverse);
+  --footer-text-secondary:  rgba(255, 255, 255, 0.60);
+  --footer-text-faint:      rgba(255, 255, 255, 0.40);
+  --footer-text-muted:      rgba(255, 255, 255, 0.50);
+  --footer-link-color:      rgba(255, 255, 255, 0.60);
+  --footer-link-hover:      var(--color-accent);
+  --footer-logo-accent:     var(--color-accent);
+  --footer-divider:         rgba(255, 255, 255, 0.10);
+
+  /* -------------------------------------------------------
+     GROUP 5 — CARD TOKENS
+     Base card + per-card-type variants.
+     ------------------------------------------------------- */
+
+  /* Base card (.card) */
+  --card-bg:                var(--color-surface);
+  --card-radius:            var(--radius-card);
+  --card-shadow:            var(--shadow-md);
+  --card-shadow-hover:      var(--shadow-lg);
+  --card-transition:        var(--transition-fast);
+  --card-icon-accent:       var(--color-accent);
+
+  /* Service card */
+  --svc-card-border:        var(--color-border);
+  --svc-card-border-hover:  var(--color-accent);
+  --svc-card-icon-bg:       rgba(217, 119, 6, 0.10);
+  --svc-card-icon-bg-hover: var(--color-accent);
+  --svc-card-icon-color:    var(--color-accent);
+  --svc-card-icon-color-hover: var(--color-text-inverse);
+  --svc-card-title-color:   var(--color-primary);
+  --svc-card-title-hover:   var(--color-accent);
+  --svc-card-desc-color:    var(--color-text-muted);
+  --svc-card-cta-color:     var(--color-accent);
+
+  /* Review card */
+  --review-card-border:     var(--color-border);
+  --review-card-star-filled: #F59E0B;
+  --review-card-star-empty:  #D1D5DB;
+  --review-card-name-color:  var(--color-primary);
+  --review-card-text-color:  var(--color-text-muted);
+  --review-card-date-color:  var(--color-text-muted);
+  --review-card-divider:     var(--color-border-subtle);
+
+  /* WhyChoose card — dark variant (on primary gradient background) */
+  --why-card-dark-bg:        rgba(255, 255, 255, 0.10);
+  --why-card-dark-bg-hover:  rgba(255, 255, 255, 0.15);
+  --why-card-dark-text:      var(--color-text-inverse);
+  --why-card-dark-desc:      rgba(255, 255, 255, 0.70);
+  --why-card-dark-icon-bg:   rgba(217, 119, 6, 0.20);
+
+  /* WhyChoose card — light variant */
+  --why-card-light-bg:       var(--color-surface);
+  --why-card-light-text:     var(--color-primary);
+  --why-card-light-desc:     var(--color-text-muted);
+  --why-card-light-icon-bg:  rgba(217, 119, 6, 0.10);
+
+  /* -------------------------------------------------------
+     GROUP 6 — SECTION TOKENS
+     Hero, CTA, Stats, About, Why Choose Us, Trust, Reviews.
+     ------------------------------------------------------- */
+
+  /* Hero */
+  --hero-bg:                var(--gradient-primary);
+  --hero-text-primary:      var(--color-text-inverse);
+  --hero-text-secondary:    rgba(255, 255, 255, 0.70);
+  --hero-accent:            var(--color-accent);
+  --hero-chip-bg:           rgba(217, 119, 6, 0.10);
+  --hero-chip-text:         var(--color-accent);
+
+  /* CTA Banner */
+  --cta-bg:                 var(--gradient-accent);
+  --cta-heading-color:      var(--color-text-inverse);
+  --cta-body-color:         rgba(255, 255, 255, 0.80);
+
+  /* Stats strip */
+  --stats-bg:               transparent;
+  --stats-number-color:     var(--color-accent);
+  --stats-label-color:      var(--color-text-muted);
+
+  /* About section */
+  --about-bg:               var(--color-surface);
+  --about-photo-bg:         var(--color-surface-muted);
+  --about-point-icon:       var(--color-accent);
+
+  /* Why Choose Us section */
+  --why-section-bg:         var(--gradient-primary);
+
+  /* Trust strip */
+  --trust-bg:               var(--color-surface);
+  --trust-border:           var(--color-border);
+  --trust-icon-color:       var(--color-accent);
+  --trust-label-color:      var(--color-primary);
+
+  /* Reviews carousel */
+  --reviews-bg:             var(--color-surface);
+  --reviews-star-color:     var(--color-accent);
+  --reviews-link-color:     var(--color-accent);
+  --reviews-link-hover:     var(--color-accent-dark);
+
+  /* -------------------------------------------------------
+     GROUP 7 — UI COMPONENT TOKENS
+     Contact form, FAQ accordion, sidebar, tabs, mobile CTA.
+     ------------------------------------------------------- */
+
+  /* Contact form */
+  --contact-label-color:        var(--color-text);
+  --contact-input-bg:           var(--color-surface);
+  --contact-input-border:       var(--color-border-strong);
+  --contact-input-border-focus: var(--color-accent);
+  --contact-input-ring-focus:   rgba(217, 119, 6, 0.15);
+  --contact-input-radius:       var(--radius-default);
+  --contact-required-color:     var(--color-error);
+  --contact-error-text:         var(--color-error);
+  --contact-error-border:       var(--color-error);
+  --contact-success-bg:         rgba(16, 185, 129, 0.10);
+  --contact-success-border:     rgba(16, 185, 129, 0.30);
+  --contact-success-text:       var(--color-success);
+  --contact-error-bg:           rgba(239, 68, 68, 0.10);
+  --contact-error-border-alert: rgba(239, 68, 68, 0.30);
+  --contact-error-alert-text:   var(--color-error);
+
+  /* FAQ accordion */
+  --faq-divider:                var(--color-border);
+  --faq-question-color:         var(--color-primary);
+  --faq-question-hover:         var(--color-accent);
+  --faq-icon-color:             var(--color-text-muted);
+  --faq-icon-hover:             var(--color-accent);
+  --faq-answer-color:           var(--color-text-muted);
+  --faq-transition:             var(--transition-medium);
+
+  /* Service sidebar */
+  --sidebar-bg:                 var(--color-surface-alt);
+  --sidebar-border:             var(--color-border);
+  --sidebar-heading-color:      var(--color-primary);
+  --sidebar-link-color:         var(--color-text);
+  --sidebar-link-hover:         var(--color-accent);
+  --sidebar-divider:            var(--color-border);
+
+  /* Category tabs */
+  --tabs-active-bg:             var(--color-primary);
+  --tabs-active-text:           var(--color-text-inverse);
+  --tabs-inactive-bg:           var(--color-surface-muted);
+  --tabs-inactive-text:         var(--color-text-muted);
+  --tabs-inactive-hover-bg:     var(--color-border);
+  --tabs-radius:                var(--radius-pill);
+  --tabs-transition:            var(--transition-fast);
+
+  /* Mobile CTA bar */
+  --mobile-cta-bg:              var(--color-surface);
+  --mobile-cta-border:          var(--color-border);
+  --mobile-cta-enquire-bg:      var(--color-accent);
+  --mobile-cta-enquire-text:    var(--color-text-inverse);
+  --mobile-cta-enquire-shadow:  var(--shadow-accent);
+  --mobile-cta-wa-bg:           var(--color-whatsapp);
+  --mobile-cta-wa-text:         var(--color-text-inverse);
+  --mobile-cta-wa-shadow:       var(--shadow-wa);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,9 +331,9 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
-    color: #1F2937;         /* text-dark */
-    background-color: #ffffff;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-surface);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -34,14 +341,14 @@
 
   /* Tamil language font override */
   html[lang="ta"] body {
-    font-family: 'Noto Sans Tamil', sans-serif;
+    font-family: var(--font-tamil);
   }
 
   /* Headings use Poppins */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-heading);
     line-height: 1.25;
-    color: #1F2937;
+    color: var(--color-text);
   }
 
   /* Links */
@@ -67,15 +374,15 @@
 
   /* Focus visible — accessibility */
   :focus-visible {
-    outline: 2px solid #D97706;
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 2px solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--focus-radius);
   }
 
   /* Selection colour */
   ::selection {
-    background-color: #D97706;
-    color: #ffffff;
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
   }
 }
 
@@ -84,80 +391,80 @@
   /* Container — max 1200px centred */
   .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--space-container-max);
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;    /* 16px mobile */
-    padding-right: 1rem;
+    padding-left: var(--space-container-px-mobile);
+    padding-right: var(--space-container-px-mobile);
   }
 
   @screen md {
     .container {
-      padding-left: 1.5rem; /* 24px tablet */
-      padding-right: 1.5rem;
+      padding-left: var(--space-container-px-tablet);
+      padding-right: var(--space-container-px-tablet);
     }
   }
 
   @screen xl {
     .container {
-      padding-left: 2rem;   /* 32px desktop */
-      padding-right: 2rem;
+      padding-left: var(--space-container-px-desktop);
+      padding-right: var(--space-container-px-desktop);
     }
   }
 
   /* Section padding rhythm */
   .section-py {
-    padding-top: 4rem;     /* 64px mobile */
-    padding-bottom: 4rem;
+    padding-top: var(--space-section-py-mobile);
+    padding-bottom: var(--space-section-py-mobile);
   }
 
   @screen md {
     .section-py {
-      padding-top: 5rem;   /* 80px tablet */
-      padding-bottom: 5rem;
+      padding-top: var(--space-section-py-tablet);
+      padding-bottom: var(--space-section-py-tablet);
     }
   }
 
   @screen lg {
     .section-py {
-      padding-top: 6rem;   /* 96px desktop */
-      padding-bottom: 6rem;
+      padding-top: var(--space-section-py-desktop);
+      padding-bottom: var(--space-section-py-desktop);
     }
   }
 
-  /* Navy gradient background (hero + dark sections) */
+  /* Primary gradient background (hero + dark sections) */
   .bg-navy-gradient {
-    background: linear-gradient(135deg, #1B2D5B 0%, #243B6E 100%);
+    background: var(--gradient-primary);
   }
 
-  /* Amber gradient background (CTA banners) */
+  /* Accent gradient background (CTA banners) */
   .bg-amber-gradient {
-    background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+    background: var(--gradient-accent);
   }
 
   /* Card base style */
   .card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--card-transition);
   }
 
   .card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 
   /* Primary button */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-heading font-semibold text-white bg-amber rounded-pill transition-all duration-200;
-    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.35);
+    box-shadow: var(--btn-primary-shadow);
   }
 
   .btn-primary:hover {
     @apply bg-amber-dark;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+    box-shadow: var(--btn-primary-shadow-hover);
   }
 
   /* Secondary button */
@@ -185,11 +492,11 @@
 
   /* Star rating */
   .star-filled {
-    color: #F59E0B;
+    color: var(--review-card-star-filled);
   }
 
   .star-empty {
-    color: #D1D5DB;
+    color: var(--review-card-star-empty);
   }
 }
 
@@ -211,7 +518,7 @@
 
   /* Gradient text */
   .text-gradient-amber {
-    background: linear-gradient(135deg, #D97706, #B45309);
+    background: var(--gradient-text-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

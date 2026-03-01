@@ -3,6 +3,7 @@ import reviews from '@data/reviews.json'
 import ReviewCard from '@components/cards/ReviewCard.astro'
 import SectionHeading from '@components/ui/SectionHeading.astro'
 import { Star } from 'lucide-astro'
+import { contact } from '@data/contact'
 
 // Duplicate for seamless marquee loop
 const allReviews = [...reviews, ...reviews]
@@ -23,7 +24,7 @@ const allReviews = [...reviews, ...reviews]
           <Star class="w-5 h-5 text-amber fill-amber" />
         ))}
       </div>
-      <span class="text-sm font-medium text-navy">5.0 on Google</span>
+      <span class="text-sm font-medium text-navy">4.8 on Google</span>
     </div>
   </div>
 
@@ -44,7 +45,7 @@ const allReviews = [...reviews, ...reviews]
   <!-- Google link -->
   <div class="container text-center mt-8">
     <a
-      href="#"
+      href={contact.mapsUrl}
       target="_blank"
       rel="noopener noreferrer"
       class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber hover:text-amber-dark transition-colors"

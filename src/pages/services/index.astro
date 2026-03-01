@@ -6,6 +6,7 @@ import ServiceCard from '@components/cards/ServiceCard.astro'
 import CtaBanner from '@components/sections/CtaBanner.astro'
 import { services, serviceCategories } from '@data/services'
 import { MessageCircle } from 'lucide-astro'
+import { contact } from '@data/contact'
 
 const breadcrumbItems = [{ label: 'Services', href: '' }]
 ---
@@ -44,7 +45,7 @@ const breadcrumbItems = [{ label: 'Services', href: '' }]
       <h2 class="font-heading font-semibold text-xl text-navy mb-2">Not sure which service you need?</h2>
       <p class="text-sm text-text-mid mb-5">Contact us for a free consultation &mdash; we'll guide you to the right solution.</p>
       <a
-        href="https://wa.me/917502979296?text=Hi%20N%20Accounts%2C%20I%20need%20help%20choosing%20the%20right%20service."
+        href={`https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent('Hi N Accounts, I need help choosing the right service.')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="btn-primary inline-flex items-center gap-2"

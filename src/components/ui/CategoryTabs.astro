@@ -13,15 +13,33 @@ interface Props {
 const { tabs, activeTab = 'all', dataAttr = 'category' } = Astro.props
 ---
 
+<style>
+  /*
+    CategoryTabs — active/inactive/hover colours via CSS variables + aria-selected.
+    Decouples styling from JavaScript: the script only toggles aria-selected,
+    CSS handles all visual states.
+  */
+
+  .tab-btn {
+    background-color: var(--tabs-inactive-bg);
+    color: var(--tabs-inactive-text);
+    border-radius: var(--tabs-radius);
+    transition: var(--tabs-transition);
+  }
+  .tab-btn:hover {
+    background-color: var(--tabs-inactive-hover-bg);
+  }
+  .tab-btn[aria-selected="true"] {
+    background-color: var(--tabs-active-bg);
+    color: var(--tabs-active-text);
+  }
+</style>
+
 <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter categories">
   {tabs.map((tab) => (
     <button
       role="tab"
-      class={`tab-btn px-4 py-2 text-sm font-medium rounded-pill transition-all duration-200 ${
-        tab.id === activeTab
-          ? 'bg-navy text-white'
-          : 'bg-bg-grey text-text-mid hover:bg-gray-200'
-      }`}
+      class="tab-btn px-4 py-2 text-sm font-medium"
       data-tab={tab.id}
       data-filter={dataAttr}
       aria-selected={tab.id === activeTab ? 'true' : 'false'}
@@ -37,14 +55,10 @@ const { tabs, activeTab = 'all', dataAttr = 'category' } = Astro.props
       const tabGroup = btn.getAttribute('data-filter') || 'category'
       const tabId = btn.getAttribute('data-tab')
 
-      // Update active states within same tab group
+      // Update active states within same tab group (aria-selected only — CSS handles visuals)
       document.querySelectorAll(`.tab-btn[data-filter="${tabGroup}"]`).forEach((t) => {
-        t.classList.remove('bg-navy', 'text-white')
-        t.classList.add('bg-bg-grey', 'text-text-mid')
         t.setAttribute('aria-selected', 'false')
       })
-      btn.classList.remove('bg-bg-grey', 'text-text-mid')
-      btn.classList.add('bg-navy', 'text-white')
       btn.setAttribute('aria-selected', 'true')
 
       // Filter items

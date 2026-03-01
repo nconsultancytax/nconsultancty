@@ -3,6 +3,25 @@ import { services } from '@data/services'
 import { Send, Loader2, Lock } from 'lucide-astro'
 ---
 
+<style>
+  /* Success / error alert boxes use CSS variable colours */
+  .form-success-msg {
+    background-color: var(--contact-success-bg);
+    border-color: var(--contact-success-border);
+  }
+  .form-success-msg .form-success-heading {
+    color: var(--contact-success-text);
+  }
+
+  .form-error-alert {
+    background-color: var(--contact-error-bg);
+    border-color: var(--contact-error-border-alert);
+  }
+  .form-error-alert .form-error-heading {
+    color: var(--contact-error-alert-text);
+  }
+</style>
+
 <form
   id="contact-form"
   class="space-y-5"
@@ -115,14 +134,14 @@ import { Send, Loader2, Lock } from 'lucide-astro'
   </p>
 
   <!-- Success message (hidden by default) -->
-  <div id="form-success" class="hidden p-4 bg-success/10 border border-success/30 rounded-card text-center">
-    <p class="font-heading font-semibold text-success">Message Sent!</p>
+  <div id="form-success" class="form-success-msg hidden p-4 border rounded-card text-center">
+    <p class="form-success-heading font-heading font-semibold">Message Sent!</p>
     <p class="text-sm text-text-mid mt-1">Thank you for reaching out. We will get back to you within 24 hours.</p>
   </div>
 
   <!-- Error message (hidden by default) -->
-  <div id="form-error-msg" class="hidden p-4 bg-error/10 border border-error/30 rounded-card text-center">
-    <p class="font-heading font-semibold text-error">Something went wrong.</p>
+  <div id="form-error-msg" class="form-error-alert hidden p-4 border rounded-card text-center">
+    <p class="form-error-heading font-heading font-semibold">Something went wrong.</p>
     <p class="text-sm text-text-mid mt-1">Please try again or contact us via WhatsApp.</p>
   </div>
 </form>
@@ -174,7 +193,7 @@ import { Send, Loader2, Lock } from 'lucide-astro'
       submitBtn.disabled = true
 
       try {
-        const apiKey = (import.meta as any).env?.PUBLIC_WEB3FORMS_KEY || ''
+        const apiKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? ''
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

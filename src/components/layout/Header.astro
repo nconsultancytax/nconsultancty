@@ -1,5 +1,6 @@
 ---
 import { mainNav, dropdownGroups } from '@data/navigation'
+import { contact } from '@data/contact'
 import LanguageToggle from './LanguageToggle.astro'
 import ServicesDropdown from './ServicesDropdown.astro'
 import MobileDrawer from './MobileDrawer.astro'
@@ -47,11 +48,11 @@ import { Phone, MessageCircle, Menu } from 'lucide-astro'
 
     <!-- Right actions -->
     <div class="flex items-center gap-3">
-      <LanguageToggle />
+      <!-- <LanguageToggle /> -->
 
       <!-- WhatsApp CTA (desktop) -->
       <a
-        href="https://wa.me/917502979296?text=Hi%20N%20Accounts%2C%20I%20am%20interested%20in%20your%20services."
+        href={`https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent('Hi N Accounts, I am interested in your services.')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="hidden lg:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-whatsapp rounded-pill hover:opacity-90 transition-opacity"

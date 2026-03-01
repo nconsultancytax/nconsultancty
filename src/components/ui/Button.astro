@@ -28,10 +28,10 @@ const sizeClasses: Record<string, string> = {
 }
 
 const variantClasses: Record<string, string> = {
-  primary: 'bg-amber text-white hover:bg-amber-dark shadow-cta hover:shadow-lg',
+  primary: 'bg-amber text-white hover:bg-amber-dark btn-variant-primary',
   secondary: 'border-2 border-navy text-navy hover:bg-navy hover:text-white',
   ghost: 'border-2 border-white text-white hover:bg-white hover:text-navy',
-  whatsapp: 'bg-whatsapp text-white hover:opacity-90 shadow-wa',
+  whatsapp: 'bg-whatsapp text-white hover:opacity-90 btn-variant-whatsapp',
 }
 
 const base = 'inline-flex items-center justify-center gap-2 font-heading font-semibold rounded-pill transition-all duration-200 min-h-[48px]'
@@ -39,6 +39,21 @@ const classes = `${base} ${sizeClasses[size]} ${variantClasses[variant]} ${class
 
 const Tag = href ? 'a' : 'button'
 ---
+
+<style>
+  /* Shadow states driven by CSS variables — Tailwind can't do per-variant hover shadows */
+  .btn-variant-primary {
+    box-shadow: var(--btn-primary-shadow);
+  }
+  .btn-variant-primary:hover {
+    box-shadow: var(--btn-primary-shadow-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-variant-whatsapp {
+    box-shadow: var(--btn-wa-shadow);
+  }
+</style>
 
 {href ? (
   <a
