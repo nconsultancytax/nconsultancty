@@ -51,7 +51,7 @@ export const faqs: FaqItem[] = [
   {
     id: 'q8',
     question: 'How do I get started?',
-    answer: 'Getting started is simple. Call or WhatsApp us at +91 7502979296, or fill out the contact form on this page. We will get back to you promptly, understand your needs, and recommend the right service for you \u2014 no jargon, no pressure.',
+    answer: 'Getting started is simple. Call or WhatsApp us at +91 9080896994, or fill out the contact form on this page. We will get back to you promptly, understand your needs, and recommend the right service for you \u2014 no jargon, no pressure.',
     category: 'general',
   },
 ]
