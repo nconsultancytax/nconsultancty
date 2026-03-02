@@ -1,19 +1,87 @@
 ---
 const stats = [
-  { value: '100+', label: 'Clients Served' },
-  { value: '12+', label: 'Services' },
-  { value: '4.8', label: 'Google Rating' },
-  { value: '100%', label: 'Online Service' },
+  { target: 100, suffix: '+', label: 'Clients Served' },
+  { target: 12, suffix: '+', label: 'Services' },
+  { target: 4.8, suffix: '', label: 'Google Rating', decimals: 1 },
+  { target: 100, suffix: '%', label: 'Online Service' },
 ]
 ---
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8">
-  {stats.map((stat) => (
-    <div class="text-center">
-      <p class="font-heading font-bold text-3xl md:text-4xl text-amber mb-1">
-        {stat.value}
-      </p>
-      <p class="text-sm text-text-mid">{stat.label}</p>
-    </div>
-  ))}
-</div>
+<section class="py-8" data-reveal aria-label="Key statistics">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+    {stats.map((stat, i) => (
+      <div class:list={[
+        'text-center',
+        i > 0 && 'md:border-l md:border-gray-200',
+      ]}>
+        <p class="font-heading font-bold text-3xl md:text-4xl text-amber mb-1">
+          <span
+            class="count-up"
+            data-count-to={stat.target}
+            data-count-suffix={stat.suffix}
+            data-count-decimals={stat.decimals ?? 0}
+          >
+            0{stat.suffix}
+          </span>
+        </p>
+        <p class="text-sm text-text-mid">{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  function animateCountUp(el: HTMLElement) {
+    const target = parseFloat(el.getAttribute('data-count-to') || '0')
+    const suffix = el.getAttribute('data-count-suffix') || ''
+    const decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10)
+    const duration = 1800 // ms
+    const start = performance.now()
+
+    function easeOutExpo(t: number): number {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+    }
+
+    function tick(now: number) {
+      const elapsed = now - start
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = easeOutExpo(progress)
+      const current = eased * target
+
+      el.textContent = current.toFixed(decimals) + suffix
+
+      if (progress < 1) {
+        requestAnimationFrame(tick)
+      }
+    }
+
+    requestAnimationFrame(tick)
+  }
+
+  // Observe each counter and trigger animation when visible
+  const counters = document.querySelectorAll('.count-up') as NodeListOf<HTMLElement>
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Skip animation — show final values immediately
+    counters.forEach((el) => {
+      const target = parseFloat(el.getAttribute('data-count-to') || '0')
+      const suffix = el.getAttribute('data-count-suffix') || ''
+      const decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10)
+      el.textContent = target.toFixed(decimals) + suffix
+    })
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCountUp(entry.target as HTMLElement)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    counters.forEach((el) => observer.observe(el))
+  }
+</script>

@@ -1,4 +1,6 @@
 ---
+import { contact } from '@data/contact'
+
 interface Props {
   title: string
   description?: string
@@ -37,6 +39,9 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || ''
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Theme color for mobile browser chrome -->
+    <meta name="theme-color" content="#0F172A" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -110,6 +115,66 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || ''
       @import '../styles/global.css';
       @import '../styles/animations.css';
     </style>
+
+    <!-- Organization JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "N Accounts & Tax Consultancy",
+      "alternateName": "N Accounts, Tax & GST Consultancy",
+      "url": siteUrl,
+      "logo": `${siteUrl}/favicon.svg`,
+      "image": `${siteUrl}/og-image.jpg`,
+      "description": "Professional accounting, tax filing, GST registration, and business registration services across India. 100% online, accurate, and affordable.",
+      "telephone": contact.phone,
+      "email": contact.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "L-71, PCM Complex, Koottappalli Colony",
+        "addressLocality": "Thiruchengodu",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "637214",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 11.3689907,
+        "longitude": 77.8694359
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "bestRating": "5",
+        "ratingCount": "100"
+      },
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "serviceType": [
+        "GST Registration & Filing",
+        "Income Tax Return Filing",
+        "TDS/TCS Filing",
+        "Company Registration",
+        "Firm Registration",
+        "Accounting & Bookkeeping",
+        "MSME Udyam Registration",
+        "Trademark Registration",
+        "Digital Signature Certificate"
+      ],
+      "sameAs": [
+        contact.mapsUrl
+      ]
+    })} />
   </head>
 
   <body class="font-body text-text-dark bg-white antialiased">
@@ -126,5 +191,34 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || ''
     )}
 
     <slot />
+
+    <!-- Scroll-reveal IntersectionObserver -->
+    <script is:inline>
+      (function () {
+        // Respect prefers-reduced-motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.querySelectorAll('[data-reveal]').forEach(function (el) {
+            el.setAttribute('data-revealed', '');
+          });
+          return;
+        }
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.setAttribute('data-revealed', '');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          observer.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>

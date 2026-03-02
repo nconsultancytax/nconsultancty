@@ -9,7 +9,7 @@ import { contact } from '@data/contact'
 const allReviews = [...reviews, ...reviews]
 ---
 
-<section class="section-py bg-white overflow-hidden">
+<section class="section-py bg-white overflow-hidden" data-reveal>
   <div class="container">
     <SectionHeading
       label="Testimonials"
@@ -19,7 +19,7 @@ const allReviews = [...reviews, ...reviews]
 
     <!-- Rating badge -->
     <div class="flex items-center justify-center gap-2 mb-8">
-      <div class="flex items-center gap-0.5">
+      <div class="flex items-center gap-0.5" role="img" aria-label="Rated 4.8 out of 5 stars">
         {Array.from({ length: 5 }).map(() => (
           <Star class="w-5 h-5 text-amber fill-amber" />
         ))}
@@ -29,8 +29,17 @@ const allReviews = [...reviews, ...reviews]
   </div>
 
   <!-- Marquee track — full viewport width -->
-  <div class="relative">
-    <div class="flex gap-4 animate-marquee no-scrollbar" style="width: max-content;">
+  <div class="relative" aria-label="Client reviews" role="region">
+    <!-- Pause / Play button -->
+    <button
+      id="marquee-toggle"
+      class="absolute top-2 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-mid bg-white/90 backdrop-blur-sm border border-gray-200 rounded-pill hover:text-navy hover:border-gray-300 transition-all"
+      aria-label="Pause reviews carousel"
+    >
+      <span id="marquee-icon" class="w-3 h-3 flex items-center justify-center">⏸</span>
+      <span id="marquee-label">Pause</span>
+    </button>
+    <div id="marquee-track" class="flex gap-4 animate-marquee no-scrollbar" style="width: max-content;">
       {allReviews.map((review) => (
         <ReviewCard
           name={review.name}
@@ -41,6 +50,22 @@ const allReviews = [...reviews, ...reviews]
       ))}
     </div>
   </div>
+
+  <script>
+    const toggle = document.getElementById('marquee-toggle')
+    const track = document.getElementById('marquee-track')
+    const icon = document.getElementById('marquee-icon')
+    const label = document.getElementById('marquee-label')
+    let paused = false
+
+    toggle?.addEventListener('click', () => {
+      paused = !paused
+      if (track) track.style.animationPlayState = paused ? 'paused' : 'running'
+      if (icon) icon.textContent = paused ? '▶' : '⏸'
+      if (label) label.textContent = paused ? 'Play' : 'Pause'
+      toggle.setAttribute('aria-label', paused ? 'Play reviews carousel' : 'Pause reviews carousel')
+    })
+  </script>
 
   <!-- Google link -->
   <div class="container text-center mt-8">

@@ -12,7 +12,7 @@ const reasons = [
 ]
 ---
 
-<section class="section-py bg-navy-gradient">
+<section class="section-py bg-navy-gradient" data-reveal>
   <div class="container">
     <SectionHeading
       label="Why Us"
@@ -22,13 +22,15 @@ const reasons = [
     />
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-      {reasons.map((reason) => (
-        <WhyChooseCard
-          icon={reason.icon}
-          title={reason.title}
-          desc={reason.desc}
-          variant="dark"
-        />
+      {reasons.map((reason, i) => (
+        <div data-reveal data-reveal-delay={i + 1}>
+          <WhyChooseCard
+            icon={reason.icon}
+            title={reason.title}
+            desc={reason.desc}
+            variant="dark"
+          />
+        </div>
       ))}
     </div>
   </div>

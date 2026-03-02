@@ -12,7 +12,7 @@ const { limit, showHeading = true } = Astro.props
 const displayServices = limit ? services.slice(0, limit) : services
 ---
 
-<section class="section-py bg-bg-light">
+<section class="section-py bg-bg-light" data-reveal>
   <div class="container">
     {showHeading && (
       <SectionHeading
@@ -23,14 +23,16 @@ const displayServices = limit ? services.slice(0, limit) : services
     )}
 
     <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-      {displayServices.map((service) => (
-        <ServiceCard
-          name={service.name}
-          slug={service.slug}
-          icon={service.icon}
-          shortDesc={service.shortDesc}
-          category={service.category}
-        />
+      {displayServices.map((service, i) => (
+        <div data-reveal data-reveal-delay={i + 1}>
+          <ServiceCard
+            name={service.name}
+            slug={service.slug}
+            icon={service.icon}
+            shortDesc={service.shortDesc}
+            category={service.category}
+          />
+        </div>
       ))}
     </div>
 
