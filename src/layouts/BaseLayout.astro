@@ -96,6 +96,15 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || ''
       </script>
     )}
 
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VVZQXDQPD"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0VVZQXDQPD');
+    </script>
+
     <!-- Global + Animation CSS -->
     <style is:global>
       @import '../styles/global.css';
