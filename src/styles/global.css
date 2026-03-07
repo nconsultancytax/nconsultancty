@@ -20,14 +20,14 @@
      Change --color-primary once to re-theme the whole site.
      ------------------------------------------------------- */
 
-  /* Brand — primary (currently navy) */
-  --color-primary:          #1B2D5B;
-  --color-primary-dark:     #243B6E;
+  /* Brand — primary (deep slate navy) */
+  --color-primary:          #0F172A;
+  --color-primary-dark:     #1E293B;
 
-  /* Brand — accent / CTA (currently amber) */
-  --color-accent:           #D97706;
-  --color-accent-dark:      #B45309;
-  --color-accent-darker:    #92400E;
+  /* Brand — accent / CTA (luxe gold) */
+  --color-accent:           #CA8A04;
+  --color-accent-dark:      #A16207;
+  --color-accent-darker:    #854D0E;
 
   /* Text scale */
   --color-text:             #1F2937;   /* primary body text */
@@ -83,8 +83,8 @@
   --shadow-md:              0 4px 12px rgba(0, 0, 0, 0.10);
   --shadow-lg:              0 8px 24px rgba(0, 0, 0, 0.12);
   --shadow-xl:              0 16px 40px rgba(0, 0, 0, 0.15);
-  --shadow-accent:          0 4px 16px rgba(217, 119, 6, 0.35);
-  --shadow-accent-hover:    0 6px 20px rgba(217, 119, 6, 0.45);
+  --shadow-accent:          0 4px 16px rgba(202, 138, 4, 0.35);
+  --shadow-accent-hover:    0 6px 20px rgba(202, 138, 4, 0.45);
   --shadow-nav:             0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-wa:              0 4px 16px rgba(37, 211, 102, 0.40);
 
@@ -93,9 +93,9 @@
   --transition-medium:      all 0.3s ease;
 
   /* Gradients */
-  --gradient-primary:       linear-gradient(135deg, #1B2D5B 0%, #243B6E 100%);
-  --gradient-accent:        linear-gradient(135deg, #D97706 0%, #B45309 100%);
-  --gradient-text-accent:   linear-gradient(135deg, #D97706, #B45309);
+  --gradient-primary:       linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  --gradient-accent:        linear-gradient(135deg, #CA8A04 0%, #A16207 100%);
+  --gradient-text-accent:   linear-gradient(135deg, #CA8A04, #A16207);
 
   /* Focus ring */
   --focus-color:            var(--color-accent);
@@ -177,7 +177,7 @@
   /* Service card */
   --svc-card-border:        var(--color-border);
   --svc-card-border-hover:  var(--color-accent);
-  --svc-card-icon-bg:       rgba(217, 119, 6, 0.10);
+  --svc-card-icon-bg:       rgba(202, 138, 4, 0.10);
   --svc-card-icon-bg-hover: var(--color-accent);
   --svc-card-icon-color:    var(--color-accent);
   --svc-card-icon-color-hover: var(--color-text-inverse);
@@ -188,7 +188,7 @@
 
   /* Review card */
   --review-card-border:     var(--color-border);
-  --review-card-star-filled: #F59E0B;
+  --review-card-star-filled: #EAB308;
   --review-card-star-empty:  #D1D5DB;
   --review-card-name-color:  var(--color-primary);
   --review-card-text-color:  var(--color-text-muted);
@@ -200,13 +200,13 @@
   --why-card-dark-bg-hover:  rgba(255, 255, 255, 0.15);
   --why-card-dark-text:      var(--color-text-inverse);
   --why-card-dark-desc:      rgba(255, 255, 255, 0.70);
-  --why-card-dark-icon-bg:   rgba(217, 119, 6, 0.20);
+  --why-card-dark-icon-bg:   rgba(202, 138, 4, 0.20);
 
   /* WhyChoose card — light variant */
   --why-card-light-bg:       var(--color-surface);
   --why-card-light-text:     var(--color-primary);
   --why-card-light-desc:     var(--color-text-muted);
-  --why-card-light-icon-bg:  rgba(217, 119, 6, 0.10);
+  --why-card-light-icon-bg:  rgba(202, 138, 4, 0.10);
 
   /* -------------------------------------------------------
      GROUP 6 — SECTION TOKENS
@@ -218,7 +218,7 @@
   --hero-text-primary:      var(--color-text-inverse);
   --hero-text-secondary:    rgba(255, 255, 255, 0.70);
   --hero-accent:            var(--color-accent);
-  --hero-chip-bg:           rgba(217, 119, 6, 0.10);
+  --hero-chip-bg:           rgba(202, 138, 4, 0.10);
   --hero-chip-text:         var(--color-accent);
 
   /* CTA Banner */
@@ -261,7 +261,7 @@
   --contact-input-bg:           var(--color-surface);
   --contact-input-border:       var(--color-border-strong);
   --contact-input-border-focus: var(--color-accent);
-  --contact-input-ring-focus:   rgba(217, 119, 6, 0.15);
+  --contact-input-ring-focus:   rgba(202, 138, 4, 0.15);
   --contact-input-radius:       var(--radius-default);
   --contact-required-color:     var(--color-error);
   --contact-error-text:         var(--color-error);
@@ -528,6 +528,11 @@
   .hero-pattern {
     background-image:
       radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(217,119,6,0.08) 0%, transparent 40%);
+      radial-gradient(circle at 80% 20%, rgba(202,138,4,0.08) 0%, transparent 40%);
+  }
+
+  /* Form field error state — toggled by JS in ContactForm */
+  .border-error {
+    border-color: var(--contact-error-border) !important;
   }
 }

@@ -16,7 +16,7 @@ const { heading, sub, breadcrumbItems } = Astro.props
 ---
 
 <section class="bg-navy-gradient py-12 lg:py-16">
-  <div class="container text-center">
+  <div class="container text-center" data-reveal>
     {breadcrumbItems && (
       <div class="flex justify-center mb-4">
         <Breadcrumb items={breadcrumbItems} />

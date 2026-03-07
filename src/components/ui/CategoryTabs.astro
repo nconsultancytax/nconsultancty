@@ -36,13 +36,15 @@ const { tabs, activeTab = 'all', dataAttr = 'category' } = Astro.props
 </style>
 
 <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter categories">
-  {tabs.map((tab) => (
+  {tabs.map((tab, i) => (
     <button
       role="tab"
       class="tab-btn px-4 py-2 text-sm font-medium"
       data-tab={tab.id}
       data-filter={dataAttr}
       aria-selected={tab.id === activeTab ? 'true' : 'false'}
+      tabindex={tab.id === activeTab ? 0 : -1}
+      aria-controls={`tabpanel-${dataAttr}`}
     >
       {tab.label}
     </button>
@@ -50,28 +52,59 @@ const { tabs, activeTab = 'all', dataAttr = 'category' } = Astro.props
 </div>
 
 <script>
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const tabGroup = btn.getAttribute('data-filter') || 'category'
-      const tabId = btn.getAttribute('data-tab')
+  const allTabs = Array.from(document.querySelectorAll('.tab-btn')) as HTMLElement[]
 
-      // Update active states within same tab group (aria-selected only — CSS handles visuals)
-      document.querySelectorAll(`.tab-btn[data-filter="${tabGroup}"]`).forEach((t) => {
-        t.setAttribute('aria-selected', 'false')
-      })
-      btn.setAttribute('aria-selected', 'true')
+  function activateTab(btn: HTMLElement) {
+    const tabGroup = btn.getAttribute('data-filter') || 'category'
+    const tabId = btn.getAttribute('data-tab')
 
-      // Filter items
-      document.querySelectorAll(`[data-${tabGroup}]`).forEach((item) => {
-        if (!(item as HTMLElement).classList.contains('tab-btn')) {
-          const itemCategory = item.getAttribute(`data-${tabGroup}`)
-          if (tabId === 'all' || itemCategory === tabId) {
-            (item as HTMLElement).style.display = ''
-          } else {
-            (item as HTMLElement).style.display = 'none'
-          }
+    // Update active states + tabindex within same tab group
+    document.querySelectorAll(`.tab-btn[data-filter="${tabGroup}"]`).forEach((t) => {
+      t.setAttribute('aria-selected', 'false')
+      ;(t as HTMLElement).tabIndex = -1
+    })
+    btn.setAttribute('aria-selected', 'true')
+    btn.tabIndex = 0
+    btn.focus()
+
+    // Filter items
+    document.querySelectorAll(`[data-${tabGroup}]`).forEach((item) => {
+      if (!(item as HTMLElement).classList.contains('tab-btn')) {
+        const itemCategory = item.getAttribute(`data-${tabGroup}`)
+        if (tabId === 'all' || itemCategory === tabId) {
+          (item as HTMLElement).style.display = ''
+        } else {
+          (item as HTMLElement).style.display = 'none'
         }
-      })
+      }
+    })
+  }
+
+  allTabs.forEach((btn) => {
+    btn.addEventListener('click', () => activateTab(btn))
+
+    // Arrow key navigation between tabs
+    btn.addEventListener('keydown', (e) => {
+      const group = btn.getAttribute('data-filter') || 'category'
+      const groupTabs = allTabs.filter(t => t.getAttribute('data-filter') === group)
+      const idx = groupTabs.indexOf(btn)
+      let next: HTMLElement | null = null
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault()
+        next = groupTabs[(idx + 1) % groupTabs.length]
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        next = groupTabs[(idx - 1 + groupTabs.length) % groupTabs.length]
+      } else if (e.key === 'Home') {
+        e.preventDefault()
+        next = groupTabs[0]
+      } else if (e.key === 'End') {
+        e.preventDefault()
+        next = groupTabs[groupTabs.length - 1]
+      }
+
+      if (next) activateTab(next)
     })
   })
 </script>

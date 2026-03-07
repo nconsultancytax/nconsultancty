@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy:           '#1B2D5B',
-        'navy-dark':    '#243B6E',
-        amber:          '#D97706',
-        'amber-dark':   '#B45309',
-        'amber-darker': '#92400E',
+        navy:           '#0F172A',
+        'navy-dark':    '#1E293B',
+        amber:          '#CA8A04',
+        'amber-dark':   '#A16207',
+        'amber-darker': '#854D0E',
         'text-dark':    '#1F2937',
         'text-mid':     '#6B7280',
         'text-sub':     '#4B5563',
@@ -37,7 +37,7 @@ export default {
         md:  '0 4px 12px rgba(0,0,0,0.10)',
         lg:  '0 8px 24px rgba(0,0,0,0.12)',
         xl:  '0 16px 40px rgba(0,0,0,0.15)',
-        cta: '0 4px 16px rgba(217,119,6,0.35)',
+        cta: '0 4px 16px rgba(202,138,4,0.35)',
         nav: '0 2px 8px rgba(0,0,0,0.08)',
         wa:  '0 4px 16px rgba(37,211,102,0.40)'
       },

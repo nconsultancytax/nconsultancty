@@ -16,7 +16,7 @@ export const services: Service[] = [
     slug: 'gst-registration-filing',
     category: 'tax',
     icon: 'FileText',
-    shortDesc: 'Register under GST and stay compliant with accurate monthly and quarterly filings.',
+    shortDesc: 'GST registration and accurate monthly/quarterly return filings.',
     fullDesc: 'Goods and Services Tax (GST) compliance is mandatory for most businesses in India. We manage the complete process — from initial GST registration to ongoing return filings — so your business stays compliant without the stress.',
     inclusions: [
       'New GST registration',
@@ -31,7 +31,7 @@ export const services: Service[] = [
     slug: 'income-tax-return',
     category: 'tax',
     icon: 'Calculator',
-    shortDesc: 'Stress-free ITR filing for salaried individuals, professionals, and businesses.',
+    shortDesc: 'ITR filing for salaried individuals, professionals, and businesses.',
     fullDesc: 'Comprehensive Income Tax Return (ITR) services for individuals, self-employed professionals, and businesses. Services include accurate preparation and timely filing of tax returns, review and rectification of previous filings, tax planning and advisory, assistance with notices and audits, and guidance on exemptions, deductions, and compliance with current income tax regulations. Designed to ensure accuracy, confidentiality, and optimized tax outcomes.',
     inclusions: [
       'Income Tax Return (ITR) filing',
@@ -47,7 +47,7 @@ export const services: Service[] = [
     slug: 'tds-tcs-filing',
     category: 'tax',
     icon: 'FileCheck',
-    shortDesc: 'Accurate TDS/TCS computation and on-time quarterly return filing.',
+    shortDesc: 'TDS/TCS computation and on-time quarterly return filing.',
     fullDesc: 'Tax Deducted at Source (TDS) and Tax Collected at Source (TCS) compliance is mandatory for businesses and employers who make specified payments. We handle all computations, quarterly return filings, and the issuance of Form 16 and 16A — keeping your business fully compliant.',
     inclusions: [
       'TDS computation and deduction advisory',
@@ -62,7 +62,7 @@ export const services: Service[] = [
     slug: 'financial-reports',
     category: 'accounting',
     icon: 'BarChart3',
-    shortDesc: 'Professionally prepared financial statements for banks, investors, and compliance.',
+    shortDesc: 'Financial statements for banks, investors, and compliance.',
     fullDesc: 'Accurate financial reports are the cornerstone of any credible business. Whether you need them to secure a bank loan, present to investors, or meet regulatory requirements, we prepare professional financial statements that are thorough, compliant, and ready to present.',
     inclusions: [
       'Balance Sheet',
@@ -77,7 +77,7 @@ export const services: Service[] = [
     slug: 'accounting-bookkeeping',
     category: 'accounting',
     icon: 'BookOpen',
-    shortDesc: 'Organised and accurate books of accounts maintained for your business.',
+    shortDesc: 'Organised, accurate books of accounts for your business.',
     fullDesc: 'Proper bookkeeping is the foundation of every financially healthy business. We maintain organised, accurate, and up-to-date books of accounts — giving you a clear picture of your business finances at any point in time, and keeping you audit-ready.',
     inclusions: [
       'Day-to-day transaction recording',
@@ -92,7 +92,7 @@ export const services: Service[] = [
     slug: 'company-registration',
     category: 'registration',
     icon: 'Building2',
-    shortDesc: 'Incorporate your Private Limited, OPC, or other company type seamlessly with MCA.',
+    shortDesc: 'Private Limited, OPC, or other company incorporation with MCA.',
     fullDesc: 'Starting a company is an exciting step — and it begins with getting the paperwork right. We manage the complete MCA (Ministry of Corporate Affairs) incorporation process, from name reservation to your Certificate of Incorporation, so you can focus on building your business.',
     inclusions: [
       'Private Limited Company registration',
@@ -107,7 +107,7 @@ export const services: Service[] = [
     slug: 'firm-registration',
     category: 'registration',
     icon: 'Handshake',
-    shortDesc: 'Register your Partnership or Proprietorship firm quickly and correctly.',
+    shortDesc: 'Partnership or Proprietorship firm registration.',
     fullDesc: 'Whether you are starting a partnership firm or setting up a sole proprietorship, we handle the complete registration process and provide all the documentation you need — from partnership deed drafting to bank account opening requirements.',
     inclusions: [
       'Partnership firm registration',
@@ -121,7 +121,7 @@ export const services: Service[] = [
     slug: 'ie-code-registration',
     category: 'registration',
     icon: 'Globe',
-    shortDesc: 'Get your Import Export Code (IEC) and start trading internationally.',
+    shortDesc: 'Import Export Code (IEC) for international trade.',
     fullDesc: 'An Import Export Code (IEC) is a mandatory 10-digit code required for any business or individual importing or exporting goods and services from India. We handle the DGFT portal application and documentation on your behalf — so your global trade ambitions are never delayed by paperwork.',
     inclusions: [
       'IEC application filing with DGFT',
@@ -135,7 +135,7 @@ export const services: Service[] = [
     slug: 'msme-udyam-registration',
     category: 'registration',
     icon: 'Award',
-    shortDesc: 'Get your MSME (Udyam) Registration and unlock government schemes, subsidies, and benefits.',
+    shortDesc: 'Udyam Registration for government schemes and subsidies.',
     fullDesc: 'Udyam Registration (formerly Udyog Aadhaar) officially classifies your business as a Micro, Small, or Medium Enterprise — unlocking a wide range of government subsidies, priority sector lending, lower trademark fees, and protection against delayed payments.',
     inclusions: [
       'Udyam Registration filing',
@@ -149,7 +149,7 @@ export const services: Service[] = [
     slug: 'dsc-digital-signature',
     category: 'registration',
     icon: 'KeyRound',
-    shortDesc: 'Obtain your Digital Signature Certificate for e-filings and government portal submissions.',
+    shortDesc: 'Digital Signature Certificate for e-filings and portals.',
     fullDesc: 'A Digital Signature Certificate (DSC) is required for MCA filings, GST registration, income tax return submissions, and numerous other government portals. We help you obtain your Class 2 or Class 3 DSC quickly and hassle-free.',
     inclusions: [
       'Class 2 DSC (for income tax and GST filings)',
@@ -163,7 +163,7 @@ export const services: Service[] = [
     slug: 'pan-tan-registration',
     category: 'registration',
     icon: 'CreditCard',
-    shortDesc: 'Apply for a new PAN or TAN card for individuals or businesses — fast and accurate.',
+    shortDesc: 'PAN or TAN application for individuals or businesses.',
     fullDesc: 'A Permanent Account Number (PAN) is essential for all financial transactions in India. A Tax Deduction Account Number (TAN) is required for any business that deducts TDS. We handle both applications — and related corrections or updates — efficiently on your behalf.',
     inclusions: [
       'New PAN application (Form 49A / 49AA)',
@@ -178,7 +178,7 @@ export const services: Service[] = [
     slug: 'trademark-registration',
     category: 'registration',
     icon: 'Shield',
-    shortDesc: 'Protect your brand name, logo, and identity with official trademark registration.',
+    shortDesc: 'Protect your brand with official trademark registration.',
     fullDesc: 'Your brand is your identity — and it deserves legal protection. Trademark registration with Intellectual Property India gives you exclusive rights over your business name, logo, and tagline, protecting them from unauthorised use by competitors.',
     inclusions: [
       'Trademark availability search',

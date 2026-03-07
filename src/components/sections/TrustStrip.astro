@@ -10,11 +10,11 @@ const badges = [
 ]
 ---
 
-<section class="border-y border-gray-200 bg-white py-4">
+<section class="border-y border-gray-200 bg-white py-4" data-reveal>
   <div class="container">
     <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 md:gap-x-12">
-      {badges.map((badge) => (
-        <div class="flex items-center gap-2">
+      {badges.map((badge, i) => (
+        <div class="flex items-center gap-2" data-reveal data-reveal-delay={i + 1}>
           <badge.icon class="w-5 h-5 text-amber shrink-0" />
           <span class="text-sm font-medium text-navy whitespace-nowrap">{badge.label}</span>
         </div>
