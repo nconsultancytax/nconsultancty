@@ -11,10 +11,10 @@ interface Props {
 const { name, rating, text, date } = Astro.props
 ---
 
-<div class="w-[300px] shrink-0 p-5 bg-white border border-gray-200 rounded-card hover:shadow-lg hover:-translate-y-1 transition-all duration-200 select-none">
+<div class="w-[300px] shrink-0 p-5 bg-white border border-gray-200 rounded-card hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
   <!-- Header: stars + date -->
   <div class="flex items-center justify-between mb-3">
-    <div class="flex items-center gap-0.5">
+    <div class="flex items-center gap-0.5" role="img" aria-label={`Rated ${rating} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           class={`w-4 h-4 ${i < rating ? 'text-amber fill-amber' : 'text-gray-300'}`}

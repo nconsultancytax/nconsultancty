@@ -48,11 +48,14 @@ const { items, firstOpen = true } = Astro.props
 </style>
 
 <div class="faq-list">
-  {items.map((item, index) => (
+  {items.map((item, index) => {
+    const panelId = `faq-panel-${item.id}`
+    return (
     <div class="faq-item" data-faq-id={item.id}>
       <button
         class="faq-trigger flex items-center justify-between w-full py-5 text-left"
         aria-expanded={firstOpen && index === 0 ? 'true' : 'false'}
+        aria-controls={panelId}
       >
         <span class="faq-question font-heading font-semibold text-base pr-4">
           {item.question}
@@ -63,6 +66,9 @@ const { items, firstOpen = true } = Astro.props
         </span>
       </button>
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={`faq-btn-${item.id}`}
         class={`faq-panel overflow-hidden transition-all duration-300 ${
           firstOpen && index === 0 ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
@@ -72,7 +78,8 @@ const { items, firstOpen = true } = Astro.props
         </p>
       </div>
     </div>
-  ))}
+    )
+  })}
 </div>
 
 <script>

@@ -25,7 +25,7 @@ const breadcrumbItems = [{ label: 'Services', href: '' }]
     <div class="container">
       <CategoryTabs tabs={serviceCategories} activeTab="all" dataAttr="category" />
 
-      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-4">
         {services.map((service) => (
           <ServiceCard
             name={service.name}

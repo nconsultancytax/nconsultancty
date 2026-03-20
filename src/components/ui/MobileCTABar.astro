@@ -11,8 +11,8 @@ const waUrl = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURICompo
 ---
 
 <!-- Fixed bottom bar — visible only on mobile, hidden on lg+ (where sidebar shows) -->
-<div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:hidden">
-  <div class="flex items-center gap-3 px-4 py-3">
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg lg:hidden" id="mobile-cta-bar">
+  <div class="flex items-center gap-3 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
     <a
       href="/contact/"
       class="flex-1 flex items-center justify-center gap-2 py-3 bg-amber text-white font-semibold rounded-pill text-sm shadow-cta"
@@ -31,3 +31,15 @@ const waUrl = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURICompo
     </a>
   </div>
 </div>
+
+<script>
+  // Push floating buttons (WhatsApp + Call) above the MobileCTABar when it's visible
+  const ctaBar = document.getElementById('mobile-cta-bar')
+  if (ctaBar && window.innerWidth < 1024) {
+    const barHeight = ctaBar.offsetHeight
+    const waBtn = document.querySelector('a[aria-label="Chat on WhatsApp"]') as HTMLElement
+    const callBtn = document.getElementById('call-btn')
+    if (waBtn) waBtn.style.bottom = `${barHeight + 12}px`
+    if (callBtn) callBtn.style.bottom = `${barHeight + 12}px`
+  }
+</script>

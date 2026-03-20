@@ -5,11 +5,14 @@ import LanguageToggle from './LanguageToggle.astro'
 import ServicesDropdown from './ServicesDropdown.astro'
 import MobileDrawer from './MobileDrawer.astro'
 import { Phone, MessageCircle, Menu } from 'lucide-astro'
+
+// Get the current page path for active nav highlighting
+const currentPath = Astro.url.pathname
 ---
 
 <header
   id="site-header"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-lg"
 >
   <div class="container flex items-center justify-between h-15 lg:h-18">
     <!-- Logo -->
@@ -21,12 +24,19 @@ import { Phone, MessageCircle, Menu } from 'lucide-astro'
 
     <!-- Desktop navigation -->
     <nav class="hidden lg:flex items-center gap-6" aria-label="Main navigation">
-      {mainNav.map((item) => (
-        item.children ? (
+      {mainNav.map((item) => {
+        const isActive = item.href === '/'
+          ? currentPath === '/'
+          : currentPath.startsWith(item.href)
+        return item.children ? (
           <div class="relative group">
             <a
               href={item.href}
-              class="inline-flex items-center gap-1 py-2 text-sm font-medium text-text-dark hover:text-amber transition-colors"
+              class:list={[
+                'inline-flex items-center gap-1 py-2 text-sm font-medium transition-colors',
+                isActive ? 'text-amber' : 'text-text-dark hover:text-amber',
+              ]}
+              {...(isActive ? { 'aria-current': 'page' } : {})}
             >
               {item.label}
               <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,12 +48,18 @@ import { Phone, MessageCircle, Menu } from 'lucide-astro'
         ) : (
           <a
             href={item.href}
-            class="py-2 text-sm font-medium text-text-dark hover:text-amber transition-colors"
+            class:list={[
+              'relative py-2 text-sm font-medium transition-colors',
+              isActive
+                ? 'text-amber after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-amber after:rounded-full'
+                : 'text-text-dark hover:text-amber',
+            ]}
+            {...(isActive ? { 'aria-current': 'page' } : {})}
           >
             {item.label}
           </a>
         )
-      ))}
+      })}
     </nav>
 
     <!-- Right actions -->
@@ -83,18 +99,42 @@ import { Phone, MessageCircle, Menu } from 'lucide-astro'
 <div class="h-15 lg:h-18" aria-hidden="true"></div>
 
 <script>
-  // Header scroll behaviour: add shadow on scroll
+  // Header scroll behaviour: shadow + solid bg on scroll, hide on scroll-down
   const header = document.getElementById('site-header')
   if (header) {
     let lastScroll = 0
-    window.addEventListener('scroll', () => {
+    let ticking = false
+
+    function updateHeader() {
       const currentScroll = window.scrollY
+
+      // Add shadow & solid background after scrolling past 10px
       if (currentScroll > 10) {
-        header.classList.add('shadow-nav')
+        header.classList.add('shadow-nav', 'bg-white/95')
       } else {
-        header.classList.remove('shadow-nav')
+        header.classList.remove('shadow-nav', 'bg-white/95')
       }
+
+      // Hide header on scroll-down, show on scroll-up (only after 300px)
+      if (currentScroll > 300) {
+        if (currentScroll > lastScroll + 5) {
+          header.style.transform = 'translateY(-100%)'
+        } else if (currentScroll < lastScroll - 5) {
+          header.style.transform = 'translateY(0)'
+        }
+      } else {
+        header.style.transform = 'translateY(0)'
+      }
+
       lastScroll = currentScroll
+      ticking = false
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader)
+        ticking = true
+      }
     }, { passive: true })
   }
 </script>

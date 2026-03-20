@@ -12,9 +12,11 @@ const { groups } = Astro.props
 ---
 
 <div
-  class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+  class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200"
+  role="menu"
+  aria-label="Services submenu"
 >
-  <div class="w-[520px] bg-white rounded-card shadow-lg border border-gray-100 p-6">
+  <div class="w-[520px] max-w-[calc(100vw-2rem)] bg-white rounded-card shadow-lg border border-gray-100 p-6">
     <div class="grid grid-cols-2 gap-6">
       {groups.map((group) => (
         <div>

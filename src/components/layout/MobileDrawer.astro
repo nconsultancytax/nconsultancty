@@ -119,14 +119,50 @@ import { Phone, MessageCircle, X, ChevronDown } from 'lucide-astro'
     menuBtn?.setAttribute('aria-expanded', 'false')
   }
 
-  menuBtn?.addEventListener('click', openDrawer)
-  closeBtn?.addEventListener('click', closeDrawer)
-  overlay?.addEventListener('click', closeDrawer)
+  // --- Focus trap utility ---
+  const focusableSelector = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
+  let previousActiveElement: HTMLElement | null = null
+
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key !== 'Tab' || !drawer) return
+    const focusable = Array.from(drawer.querySelectorAll(focusableSelector)) as HTMLElement[]
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus() }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+  }
+
+  function openDrawerA11y() {
+    previousActiveElement = document.activeElement as HTMLElement
+    openDrawer()
+    // Move focus to close button after transition
+    setTimeout(() => closeBtn?.focus(), 310)
+    document.addEventListener('keydown', trapFocus)
+  }
+
+  function closeDrawerA11y() {
+    closeDrawer()
+    document.removeEventListener('keydown', trapFocus)
+    // Restore focus to the element that opened the drawer
+    setTimeout(() => previousActiveElement?.focus(), 310)
+  }
+
+  menuBtn?.addEventListener('click', openDrawerA11y)
+  closeBtn?.addEventListener('click', closeDrawerA11y)
+  overlay?.addEventListener('click', closeDrawerA11y)
 
   // Services accordion in mobile drawer
-  document.querySelectorAll('.mobile-accordion-btn').forEach((btn) => {
+  document.querySelectorAll('.mobile-accordion-btn').forEach((btn, index) => {
+    const panel = btn.nextElementSibling as HTMLElement
+    const panelId = `mobile-services-panel-${index}`
+    if (panel) panel.id = panelId
+    btn.setAttribute('aria-controls', panelId)
+
     btn.addEventListener('click', () => {
-      const panel = btn.nextElementSibling as HTMLElement
       const expanded = btn.getAttribute('aria-expanded') === 'true'
       btn.setAttribute('aria-expanded', String(!expanded))
       panel?.classList.toggle('hidden')
@@ -137,6 +173,6 @@ import { Phone, MessageCircle, X, ChevronDown } from 'lucide-astro'
 
   // Close on Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeDrawer()
+    if (e.key === 'Escape') closeDrawerA11y()
   })
 </script>
